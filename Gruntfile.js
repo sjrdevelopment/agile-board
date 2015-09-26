@@ -48,9 +48,19 @@ module.exports = function(grunt) {
 	watch: {
       css: {
         files: 'src/scss/*.scss',
-        tasks: ['sass'],
+        tasks: ['sass']
 	  },
 
+	  js: {
+	  	files: ['src/js/*.js', 'src/js/collections/*.js', 'src/js/models/*.js', 'src/js/views/*.js'],
+	  	tasks: ['requirejs']
+	  },
+
+	  hbs: {
+		files: 'src/hbs/*.hbs',
+		tasks: ['requirejs']
+	  },
+	  
 	  options: {
       	livereload: true
       }

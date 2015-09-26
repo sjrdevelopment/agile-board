@@ -11,9 +11,14 @@ require.config({
         "text": "../bower_components/requirejs-text/text",
   
         // components
+        
         "appController": "js/app-controller",
-        "mainModel": "js/models/main-model",
-        "mainView": "js/views/main-view"
+        "storiesCollection": "js/collections/stories",
+        "storyModel": "js/models/story",
+        "storyView": "js/views/story",
+        "tasksCollection": "js/collections/tasks",
+        "taskModel": "js/models/task",
+        "taskView": "js/views/task"
      },
 
     deps: [

@@ -2,18 +2,18 @@ define([
   'jquery',
   'backbone',
   'handlebars',
-  'text!hbs/main-template.hbs'
+  'text!hbs/story-template.hbs'
 ],function(
   $,
   Backbone,
   Handlebars,
   mainTemplate
 ) {
-  var MainView = Backbone.View.extend({
+  var story = Backbone.View.extend({
 
-      el:  ".name-area",
-
-      tagName: 'h1',
+      tagName: 'div',
+      
+      className: 'story-row',
 
       // The DOM events specific to an item.
       events: {
@@ -22,7 +22,7 @@ define([
 
       initialize: function() {
         console.log('initialise view');
-        this.render();
+       // this.render();
         this.listenTo(this.model.on('change', this.render.bind(this)));
       },
 
@@ -36,6 +36,6 @@ define([
       }
   });
 
-  return MainView;
+  return story;
 
 });
