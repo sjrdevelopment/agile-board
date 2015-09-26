@@ -24,7 +24,7 @@ module.exports = function(grunt) {
 		},
 	      dist: {
 	        files: {
-	          'public/css/main.css' : 'src/scss/*.scss'
+	          'public/assets/css/main.css' : 'src/scss/*.scss'
 	        }
 	      }
     },
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
 		files: 'src/hbs/*.hbs',
 		tasks: ['requirejs']
 	  },
-	  
+
 	  options: {
       	livereload: true
       }

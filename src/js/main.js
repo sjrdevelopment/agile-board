@@ -37,6 +37,13 @@ require(['jquery', 'underscore', 'backbone', 'storyView', 'storiesCollection', '
 	    });
     });
 
+    $('.add-story-button').on('click', function(){
+    	$('html').addClass('overlay-active');
+
+    	// create new view for modal
+
+    		// append view $el to .overlay
+    })
 	
 	
 });

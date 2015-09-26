@@ -17,7 +17,7 @@ define([
 
       // The DOM events specific to an item.
       events: {
-
+  
       },
 
       initialize: function() {
