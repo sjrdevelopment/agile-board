@@ -37,9 +37,15 @@ require(['jquery', 'underscore', 'backbone', 'storyView', 'storiesCollection', '
 	    });
     });
 
-    $('.add-story-button').on('click', function(){
+    $('.add-story-button').on('click', function(event){
     	$('html').addClass('overlay-active');
+    	event.stopPropagation();
 
+    	$('body').on('click', function(event) {
+    		if ( $(event.target).closest('.overlay').length === 0 ) {
+		        $('html').removeClass('overlay-active');
+		    } 
+    	})
     	// create new view for modal
 
     		// append view $el to .overlay

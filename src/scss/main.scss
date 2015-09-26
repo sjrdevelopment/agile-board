@@ -60,11 +60,12 @@ body {
 		    opacity: 1;
 		}
 	}
-	
+
 	.board-title {
 		text-align: center;
 		color: #fff;
 		text-transform: uppercase;
+		margin: 60px auto 30px;
 	}
 
 	.board {
@@ -103,8 +104,16 @@ body {
 				vertical-align: top;
 			}
 
-			td {
+			td,
+			th {
 				width: 33.3%;
+			}
+
+			th {
+				text-transform: uppercase;
+				font-weight: 400;
+				font-size: 14px;
+				color: #67809F;
 			}
 		}
 
