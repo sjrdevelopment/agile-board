@@ -1,5 +1,15 @@
 <div class="story-card priortiy-{{priority}}" data-priority="{{priority}}" data-story-id="{{id}}">
-	<p>Story</p>
+	<button class="story-edit-button">Edit</button>
+	<button class="story-delete-button">Delete</button>
+	<dl>
+		<dt>Priority</dt>
+		<dd>{{priority}}</dd>
+		<dt>Created</dt>
+		<dd>{{created}}</dd>
+		<dt>Last modified</dt>
+		<dd>{{modified}}</dd>
+	</dl>
+
 	<h2>As a {{persona}} <br/>I want to {{feature}} <br/>so that I can {{justification}}</h2>
 </div>
 

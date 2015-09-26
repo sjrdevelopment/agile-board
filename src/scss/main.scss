@@ -3,8 +3,14 @@
 }
 
 body {
-	background-color: #ccc;
+	background-color: #34495E;
 	font-family: Helvetica, Arial, sans-serif;
+	
+	.board-title {
+		text-align: center;
+		color: #fff;
+		text-transform: uppercase;
+	}
 
 	.board {
 		background-color: #fff;
@@ -13,7 +19,8 @@ body {
 		padding: 10px;
 
 		.story-row {
-			background-color: #00f;
+			color: #22313F;
+			background-color: #f5f5f5;
 			padding: 10px;
 			display: inline-block;
 			width: 100%;
@@ -22,6 +29,14 @@ body {
 				content: "";
 				display: table;
 				clear: both;
+			}
+
+			&:nth-child(odd) {
+				background-color: #cfe0e2;
+
+				.task-card {
+					background-color: #52B3D9;
+				}
 			}
 
 			table {
@@ -39,7 +54,6 @@ body {
 		}
 
 		.story-card {
-			color: #fff;
 			width: 25%;
 			padding: 10px;
 			display: inline-block;
@@ -52,8 +66,8 @@ body {
 		
 
 		.task-card {
-			background-color: #fff;
-			color: #000;
+			background-color: #59ABE3;
+			color: #fff;
 			padding: 10px;
 			border-radius: 5px;
 			display: block;
