@@ -1,3 +1,5 @@
+@import 'mixins.scss';
+
 * {
 	box-sizing: border-box;
 }
@@ -23,6 +25,14 @@ body {
 	background-color: #34495E;
 	font-family: Helvetica, Arial, sans-serif;
 	
+	@include medium-up {
+		background-color: red;
+	}
+
+	@include large-up {
+		background-color: green;
+	}
+
 	.underlay,
 	.overlay {
 		visibility: hidden;
