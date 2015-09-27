@@ -10,18 +10,19 @@ define(['jquery', 'backbone', 'tasksCollection'], function($, Backbone, TasksCol
 		},
 
 		validate: function(attrs, options) {
-		    debugger;
-		}
-
-		/*
-
-		// Eg implememntation: 
 		
-		onChange:  function() {
-			this.save({feature:'stubert'}, {patch:true})
+		},
+	
+		syncWithApi:  function() {
+	
+			var changedAttributes = this.changed;
+			
+			if (!_.isEmpty(changedAttributes)) {
+			
+				this.save(changedAttributes, {patch:true});
+			}
 		}
 
-		*/
 	});
 
     return storyModel;

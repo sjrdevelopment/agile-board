@@ -2,12 +2,16 @@ define([
   'jquery',
   'backbone',
   'handlebars',
-  'text!hbs/story-template.hbs'
+  'text!hbs/story-template.hbs',
+  'editStoryView',
+  'editStoryModel'
 ],function(
   $,
   Backbone,
   Handlebars,
-  mainTemplate
+  mainTemplate,
+  EditStoryView,
+  EditStoryModel
 ) {
   var story = Backbone.View.extend({
 
@@ -17,7 +21,7 @@ define([
 
       // The DOM events specific to an item.
       events: {
-  
+        "click .story-edit-button": "onStoryEditClick"
       },
 
       initialize: function() {
@@ -27,6 +31,14 @@ define([
 
         window.myModel = this.model;
 
+      },
+
+      onStoryEditClick: function() {
+        var editStory = new EditStoryView({
+          model: new EditStoryModel({
+            storyModel: this.model
+          })
+        });
       },
 
       "mainTemplate":  Handlebars.compile(mainTemplate),

@@ -1,6 +1,6 @@
 require(['jquery', 'underscore', 'backbone', 'storyView', 'storiesCollection', 'tasksCollection', 'taskView'], function ($, _, Backbone, StoryView, StoriesCollection, TasksCollection, TaskView) {
 	Backbone.history.start();
-    
+
     var stories = new StoriesCollection();
 	var tasks = new TasksCollection();
 
@@ -10,7 +10,7 @@ require(['jquery', 'underscore', 'backbone', 'storyView', 'storiesCollection', '
 
         var view = new StoryView({model: storyModel});
 
-        $('.board').append( view.render().el );
+        $('.board').append( view.render().el ); //need to render()?
       });
     };
 
