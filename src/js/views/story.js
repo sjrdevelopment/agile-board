@@ -64,13 +64,15 @@ define([
           } 
         });
         
-
+        var storyID = this.model.get('id');
+        debugger;
+        
         var newTaskModel = new TaskModel({}, {newModel: true});
 
         var taskCreator = new EditTaskView({
           model: new EditTaskModel({
               taskModel: new TaskModel({
-                story_id: this.model.id
+                story_id: storyID
               },{
                 newModel: true
               })

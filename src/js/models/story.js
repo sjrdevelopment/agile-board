@@ -17,7 +17,7 @@ define([
 			this.idAttribute = 'id';
 
 			if (options.newModel) {
-				
+				this.newModel = true;
 				
 			} else {
 				this.setPriority();
@@ -32,7 +32,7 @@ define([
 
 		setPriority: function(options, response) {
 			
-			if (options && options.newModel) {
+			if (this.newModel) {
 
 				this.set('id', response);
 
