@@ -32,12 +32,14 @@ define([
 
 		setPriority: function(options, response) {
 			
-			this.set('id', response);
+			if (options && options.newModel) {
 
-			this.fetch({
-				success: _.bind(this.syncedModel, this)
-			});
+				this.set('id', response);
 
+				this.fetch({
+					success: _.bind(this.syncedModel, this)
+				});
+			}
 		
 
 			switch(parseInt(this.get('priority'), 10)) {

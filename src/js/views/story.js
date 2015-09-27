@@ -66,10 +66,11 @@ define([
 
       // Re-renders the titles of the todo item.
       render: function() {
-   
+        
         this.$el.html(this.mainTemplate(this.model.attributes));
-
+      
         return this;
+        
       }
   });
 

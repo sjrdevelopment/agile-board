@@ -51,7 +51,7 @@ require([
     var renderTaskViews = function() {
      
       _.each(tasks.models, function(taskModel, index) {
-
+        debugger;
         var view = new TaskView({model: taskModel});
 
         //$('.tasks').append( view.render().el );
