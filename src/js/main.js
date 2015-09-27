@@ -83,6 +83,7 @@ require([
                 $('body').off('click:rem');
 		    } 
     	});
+        
     	// create new view for modal
         /*
         var newStory = new StoryView({

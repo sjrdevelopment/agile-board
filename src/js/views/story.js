@@ -21,13 +21,18 @@ define([
 
       // The DOM events specific to an item.
       events: {
-        "click .story-edit-button": "onStoryEditClick"
+        "click .story-edit-button": "onStoryEditClick",
+        "click .story-delete-button": "onStoryDeleteClick"
       },
 
       initialize: function() {
         console.log('initialise view');
-       // this.render();
-        this.listenTo(this.model.on('change', this.render.bind(this)));
+        // this.render();
+
+        // check this?
+        this.listenTo(this.model.on('change', this.render.bind(this))); 
+        
+        this.listenTo(this.model.on('destroy', _.bind(this.removeView, this)));
 
         window.myModel = this.model;
 
@@ -35,6 +40,11 @@ define([
         this.model.on('change:modified', _.bind(this.render, this));
 
       },
+
+      removeView: function() {
+        this.remove();
+      },
+
 
       onStoryEditClick: function() {
      
@@ -45,6 +55,11 @@ define([
             storyModel: thisStoryModel
           })
         });
+      },
+
+      onStoryDeleteClick: function() {
+     
+        this.model.destroy();
       },
 
       "mainTemplate":  Handlebars.compile(mainTemplate),
