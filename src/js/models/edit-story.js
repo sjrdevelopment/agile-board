@@ -3,7 +3,7 @@ define(['jquery', 'backbone', 'storyModel'], function($, Backbone, StoryModel) {
 	var editStoryModel = Backbone.Model.extend({
 
 		initialize: function(attr, options) {
-
+			debugger;
 			if (this.get('storyModel')) {
 				_.extend(this.attributes, this.get('storyModel').attributes);
 			}

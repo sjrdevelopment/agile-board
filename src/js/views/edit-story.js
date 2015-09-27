@@ -25,7 +25,6 @@ define([
 
         this.render();
        
-
       },
 
       saveStoryChanges: function() {
@@ -45,14 +44,15 @@ define([
         this.$el.html(this.mainTemplate(this.model.attributes));
         $('.overlay').html(this.$el);
         $('html').addClass('overlay-active');
-
+        debugger;
         //window.stopPropagation();
 
-        $('body').on('click:closeOverlay', function(event) {
+        /*$('body').on('click:closeOverlay', function(event) {
           if ( $(event.target).closest('.overlay').length === 0 ) {
               $('html').removeClass('overlay-active');
           } 
-        })
+        });
+*/
         return this;
       }
   });

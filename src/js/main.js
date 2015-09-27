@@ -77,9 +77,10 @@ require([
     	$('html').addClass('overlay-active');
     	event.stopPropagation();
 
-    	$('body').on('click', function(event) {
+    	$('body').on('click:rem', function(event) {
     		if ( $(event.target).closest('.overlay').length === 0 ) {
 		        $('html').removeClass('overlay-active');
+                $('body').off('click:rem');
 		    } 
     	});
     	// create new view for modal

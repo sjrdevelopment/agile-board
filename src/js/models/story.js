@@ -25,7 +25,8 @@ define([
 		},
 
 		syncedModel: function(mod, response, options) {
-			this.attributes = response[0];
+			debugger;
+			//this.attributes = response[0];
 			
 		},
 

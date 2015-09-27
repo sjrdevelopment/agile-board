@@ -37,10 +37,12 @@ define([
       },
 
       onStoryEditClick: function() {
+     
+        var thisStoryModel = this.model;
 
         var editStory = new EditStoryView({
           model: new EditStoryModel({
-            storyModel: this.model
+            storyModel: thisStoryModel
           })
         });
       },
