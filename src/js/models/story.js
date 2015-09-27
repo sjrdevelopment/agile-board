@@ -8,14 +8,26 @@ define(['jquery', 'backbone', 'tasksCollection'], function($, Backbone, TasksCol
 			this.urlRoot = 'v1/stories';
 			this.idAttribute = 'id';
 
-			switch(this.get('priority')) {
+			this.setPriority();
+		},
+
+		setPriority: function() {
+			switch(parseInt(this.get('priority'), 10)) {
 				case 1: this.set('isp1', true);
+						this.set('isp2', false);
+						this.set('isp3', false);
 				break;
-				case 2: this.set('isp2', true);
+				case 2: this.set('isp1', false);
+						this.set('isp2', true);
+						this.set('isp3', false);
 				break;
-				case 3: this.set('isp3', true);
+				case 3: this.set('isp1', false);
+						this.set('isp2', false);
+						this.set('isp3', true);
 				break;
-				default: break;
+				default: this.set('isp1', false);
+						 this.set('isp2', false);
+						 this.set('isp3', false);
 			}
 		},
 
@@ -27,7 +39,7 @@ define(['jquery', 'backbone', 'tasksCollection'], function($, Backbone, TasksCol
 			
 			if (!_.isEmpty(changedAttributes)) {
 			
-				this.save(changedAttributes, {patch:true});
+				this.save(changedAttributes, {patch:true, success: _.bind(this.setPriority, this)});
 			}
 		}
 
