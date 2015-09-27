@@ -32,6 +32,10 @@ define([
         var paramArray = $('form').serializeArray();
 
         this.model.updateStoryModel(paramArray);
+
+        $('html').removeClass('overlay-active');
+        $('body').off('click:closeOverlay');
+
       },
 
       "mainTemplate":  Handlebars.compile(mainTemplate),
@@ -39,12 +43,12 @@ define([
       // Re-renders the titles of the todo item.
       render: function() {
         this.$el.html(this.mainTemplate(this.model.attributes));
-        $('.overlay').append(this.$el);
+        $('.overlay').html(this.$el);
         $('html').addClass('overlay-active');
 
         window.stopPropagation();
 
-        $('body').on('click', function(event) {
+        $('body').on('click:closeOverlay', function(event) {
           if ( $(event.target).closest('.overlay').length === 0 ) {
               $('html').removeClass('overlay-active');
           } 

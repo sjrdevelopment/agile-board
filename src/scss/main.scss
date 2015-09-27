@@ -51,13 +51,61 @@ body {
 		.overlay-active & {
 		    display: block;
 		    z-index: 9;
-		    width: 40%;
+		    width: 50%;
 		    height: 200px;
 		    background-color: white;
 		    margin: auto;
 		    top: 20%;
-		    left: 30%;
+		    left: 25%;
 		    opacity: 1;
+		}
+
+		.overlay-content {
+			background-color: #336E7B;
+			color: #fff;
+			padding: 10px;
+
+			&:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+
+			.natural-language-input {
+				&:after {
+					content: "";
+					display: table;
+					clear: both;
+				}
+			
+				label {
+					float: left;
+					clear: left;
+					width: 20%;
+					padding: 10px 10px 10px 0;
+					margin: 4px 0;
+				}
+
+				input {
+					padding: 10px;
+					font-size: 14px;
+					width: 80%;
+					float: right;
+					-webkit-appearance: none;
+					appearance: none;
+					background-color: #C5EFF7;
+					color: #414141;
+					border: 0;
+					margin: 4px 0;
+				}
+			}
+
+			.save-button {
+				clear: both;
+				display: block;
+				width: 120px;
+				margin: 10px auto;
+			}
 		}
 	}
 

@@ -7,14 +7,16 @@
 		<option value="3" {{#if isp3}}selected="selected"{{/if}}>3</option>
 	</select>
 
-	<label for="persona">As a</label>
-	<input type="text" name="persona" id="persona" value="{{persona}}" />
+	<div class="natural-language-input">
+		<label for="persona">As a</label>
+		<input type="text" name="persona" id="persona" value="{{persona}}" />
 
-	<label for="feature">I want to</label>
-	<input type="text" name="feature" id="feature" value="{{feature}}" />
+		<label for="feature">I want to</label>
+		<input type="text" name="feature" id="feature" value="{{feature}}" />
 
-	<label for="justification">So that I can</label>
-	<input type="text" name="justification" id="justification" value="{{justification}}"/>
+		<label for="justification">So that I can</label>
+		<input type="text" name="justification" id="justification" value="{{justification}}"/>
+	</div>
 
 	<button type="button" class="save-button">Save</button>
 </form>
