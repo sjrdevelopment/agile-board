@@ -9,14 +9,16 @@ define(['jquery', 'backbone'], function($, Backbone) {
 
 		updateStoryModel: function(paramArray) {
 			var storyModel = this.get('storyModel');
-	
+			
+			var dataChanged = {};
+
 			_.each(paramArray, function(element, index, list) {
 	    		if (storyModel.get(element.name) !== element.value) {
-	          		storyModel.set(element.name, element.value);
+	          		dataChanged[element.name] = element.value;
 	          	}
 	        });
 
-	        storyModel.syncWithApi();
+	        storyModel.syncWithApi(dataChanged);
 		
 		}
 

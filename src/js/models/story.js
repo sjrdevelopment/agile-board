@@ -13,9 +13,7 @@ define(['jquery', 'backbone', 'tasksCollection'], function($, Backbone, TasksCol
 		
 		},
 	
-		syncWithApi:  function() {
-	
-			var changedAttributes = this.changed;
+		syncWithApi:  function(changedAttributes) {
 			
 			if (!_.isEmpty(changedAttributes)) {
 			
