@@ -1,5 +1,7 @@
 require(['jquery', 'underscore', 'backbone', 'storyView', 'storiesCollection', 'tasksCollection', 'taskView'], function ($, _, Backbone, StoryView, StoriesCollection, TasksCollection, TaskView) {
-	var stories = new StoriesCollection();
+	Backbone.history.start();
+    
+    var stories = new StoriesCollection();
 	var tasks = new TasksCollection();
 
 	var renderStoryViews = function() {

@@ -24,6 +24,9 @@ define([
         console.log('initialise view');
        // this.render();
         this.listenTo(this.model.on('change', this.render.bind(this)));
+
+        window.myModel = this.model;
+
       },
 
       "mainTemplate":  Handlebars.compile(mainTemplate),

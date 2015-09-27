@@ -6,6 +6,7 @@ module.exports = function(grunt) {
       
     },
     
+	/*
 	connect: {
 	    server: {
 	      options: {
@@ -17,6 +18,7 @@ module.exports = function(grunt) {
 	      }
 	    }
 	},
+	*/
 
 	sass: {
 		options: {
@@ -24,7 +26,7 @@ module.exports = function(grunt) {
 		},
 	      dist: {
 	        files: {
-	          'public/assets/css/main.css' : 'src/scss/*.scss'
+	          'api/public/assets/css/main.css' : 'src/scss/*.scss'
 	        }
 	      }
     },
@@ -35,7 +37,7 @@ module.exports = function(grunt) {
           baseUrl: "src",
           mainConfigFile: "src/js/config.js",
           name: "../bower_components/almond/almond", // assumes a production build using almond
-          out: "public/assets/js/compiled.js",
+          out: "api/public/assets/js/compiled.js",
           findNestedDependencies: true,
           include: 'js/main.js',
           optimize: 'none',
@@ -73,7 +75,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-  grunt.registerTask('default', ['requirejs', 'sass', 'connect', 'watch']);
+  grunt.registerTask('default', ['requirejs', 'sass', 'watch'/*, 'connect' */]);
 
   //grunt.registerTask('dist', ['sass:dist', 'copy:dist']);
 }
