@@ -22,6 +22,7 @@ define([
       // The DOM events specific to an item.
       events: {
         "click .task-edit-button": "onTaskEditClick",
+        "click .task-delete-button": "onTaskDeleteClick"
       },
 
       initialize: function() {
@@ -34,11 +35,15 @@ define([
 
 
         this.listenTo(this.model.on('change:modified', this.render.bind(this)));
-        
-        //this.model.on('change', this.someBloodyFunction);
+
+        this.listenTo(this.model.on('destroy', _.bind(this.removeView, this)));
+
+       
       },
 
-  
+      removeView: function() {
+        this.remove();
+      },
 
       "mainTemplate":  Handlebars.compile(mainTemplate),
 
@@ -73,7 +78,18 @@ define([
           })
         });
         
+      },
+
+      onTaskDeleteClick: function() {
+        var r = confirm('Are you sure you want to delete the task "' + this.model.get('description') + '"?');
+        if (r == true) {
+            this.model.destroy();
+        } else {
+            return;
+        }
+        
       }
+
   });
 
   return task;

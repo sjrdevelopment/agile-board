@@ -66,7 +66,7 @@ define([
         
         var storyID = this.model.get('id');
         debugger;
-        
+
         var newTaskModel = new TaskModel({}, {newModel: true});
 
         var taskCreator = new EditTaskView({
@@ -92,8 +92,13 @@ define([
       },
 
       onStoryDeleteClick: function() {
-     
-        this.model.destroy();
+        var r = confirm('Are you sure you want to delete the story "As a ' + this.model.get('persona') + ' I want to ' + this.model.get('feature') + '..."');
+        if (r == true) {
+            this.model.destroy();
+        } else {
+            return;
+        }
+        
       },
 
       "mainTemplate":  Handlebars.compile(mainTemplate),
