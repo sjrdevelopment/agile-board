@@ -1,17 +1,51 @@
-require(['jquery', 'underscore', 'backbone', 'storyView', 'storiesCollection', 'tasksCollection', 'taskView'], function ($, _, Backbone, StoryView, StoriesCollection, TasksCollection, TaskView) {
+require([
+    'jquery',
+    'underscore',
+    'backbone',
+    'storyView',
+    'storyModel',
+    'storiesCollection',
+    'tasksCollection',
+    'taskView',
+    'editStoryView',
+    'editStoryModel'
+], function (
+    $,
+    _,
+    Backbone,
+    StoryView,
+    StoryModel,
+    StoriesCollection,
+    TasksCollection,
+    TaskView,
+    EditStoryView,
+    EditStoryModel
+) {
 	Backbone.history.start();
 
     var stories = new StoriesCollection();
 	var tasks = new TasksCollection();
 
+
+    
+
+    var addItemView = function(modelAdded) {
+    
+        var view = new StoryView({model: modelAdded});
+
+        $('.board').append( view.render().el );
+    };
+
+    stories.on("add", addItemView, this);
+
 	var renderStoryViews = function() {
      
-      _.each(stories.models, function(storyModel, index) {
+      //_.each(stories.models, function(storyModel, index) {
 
-        var view = new StoryView({model: storyModel});
+       // var view = new StoryView({model: storyModel});
 
-        $('.board').append( view.render().el ); //need to render()?
-      });
+      //  $('.board').append( view.render().el ); //need to render()?
+      //});
     };
 
     var renderTaskViews = function() {
@@ -47,11 +81,31 @@ require(['jquery', 'underscore', 'backbone', 'storyView', 'storiesCollection', '
     		if ( $(event.target).closest('.overlay').length === 0 ) {
 		        $('html').removeClass('overlay-active');
 		    } 
-    	})
+    	});
     	// create new view for modal
+        /*
+        var newStory = new StoryView({
+            model: new StoryModel({}, {newModel: true})
+        });
+        */
+
+        var newStoryModel = new StoryModel({}, {newModel: true});
+
+        var editStory = new EditStoryView({
+          model: new EditStoryModel({
+                storyModel: newStoryModel
+            }, {
+                storiesCollection: stories
+            }
+          )
+        });
+
+
+
+
 
     		// append view $el to .overlay
-    })
+    });
 	
 	
 });

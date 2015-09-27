@@ -22,7 +22,7 @@ define([
       },
 
       initialize: function() {
-        console.log('initialise view');
+
         this.render();
        
 
@@ -46,7 +46,7 @@ define([
         $('.overlay').html(this.$el);
         $('html').addClass('overlay-active');
 
-        window.stopPropagation();
+        //window.stopPropagation();
 
         $('body').on('click:closeOverlay', function(event) {
           if ( $(event.target).closest('.overlay').length === 0 ) {

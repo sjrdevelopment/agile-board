@@ -1,17 +1,44 @@
-define(['jquery', 'backbone', 'tasksCollection'], function($, Backbone, TasksCollection) {
+define([
+	'jquery',
+	'backbone',
+	'tasksCollection'
+], function(
+	$,
+	Backbone,
+	TasksCollection
+) {
 	var tasks;
 
 	var storyModel = Backbone.Model.extend({
 
-		initialize: function() {
+		initialize: function(attr, options) {
 			//this.urlRoot = '/stories/' + this.get('id');
 			this.urlRoot = 'v1/stories';
 			this.idAttribute = 'id';
 
-			this.setPriority();
+			if (options.newModel) {
+				
+				
+			} else {
+				this.setPriority();
+			}
 		},
 
-		setPriority: function() {
+		syncedModel: function(mod, response, options) {
+			this.attributes = response[0];
+			
+		},
+
+		setPriority: function(options, response) {
+			
+			this.set('id', response);
+
+			this.fetch({
+				success: _.bind(this.syncedModel, this)
+			});
+
+		
+
 			switch(parseInt(this.get('priority'), 10)) {
 				case 1: this.set('isp1', true);
 						this.set('isp2', false);
@@ -34,12 +61,17 @@ define(['jquery', 'backbone', 'tasksCollection'], function($, Backbone, TasksCol
 		validate: function(attrs, options) {
 		
 		},
+
+		showError: function(error, options) {
+			
+		},
 	
 		syncWithApi:  function(changedAttributes) {
 			
 			if (!_.isEmpty(changedAttributes)) {
 			
-				this.save(changedAttributes, {patch:true, success: _.bind(this.setPriority, this)});
+				this.save(changedAttributes, {patch:true, error: this.showError, success: _.bind(this.setPriority, this)});
+
 			}
 		}
 

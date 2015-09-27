@@ -13,7 +13,7 @@ define([
   EditStoryView,
   EditStoryModel
 ) {
-  var story = Backbone.View.extend({
+  var storyView = Backbone.View.extend({
 
       tagName: 'div',
       
@@ -31,9 +31,13 @@ define([
 
         window.myModel = this.model;
 
+
+        this.model.on('change:modified', _.bind(this.render, this));
+
       },
 
       onStoryEditClick: function() {
+
         var editStory = new EditStoryView({
           model: new EditStoryModel({
             storyModel: this.model
@@ -45,12 +49,13 @@ define([
 
       // Re-renders the titles of the todo item.
       render: function() {
+   
         this.$el.html(this.mainTemplate(this.model.attributes));
 
         return this;
       }
   });
 
-  return story;
+  return storyView;
 
 });
