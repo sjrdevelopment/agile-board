@@ -1,0 +1,21 @@
+<h3>{{#if priority}}Edit{{else}}New{{/if}} task</h3>
+<form>
+	<label for="priority">Priority</label>
+	<select id="priority" name="priority" selected="{{priority}}">
+		<option value="1" {{#if isp1}}selected="selected"{{/if}}>1</option>
+		<option value="2" {{#if isp2}}selected="selected"{{/if}}>2</option>
+		<option value="3" {{#if isp3}}selected="selected"{{/if}}>3</option>
+	</select>
+	
+	<label for="status">Status</label>
+	<select id="status" name="status" selected="{{status}}">
+		<option value="to do">To do</option>
+		<option value="in progress">In progress</option>
+		<option value="done">Done</option>
+	</select>
+
+	<label for="description">Description</label>
+	<input type="text" name="description" id="description" value="{{description}}" />
+
+	<button type="button" class="save-button">Save</button>
+</form>

@@ -2,11 +2,15 @@ define([
   'jquery',
   'backbone',
   'handlebars',
+  'editTaskView',
+  'editTaskModel',
   'text!hbs/task-template.hbs'
 ],function(
   $,
   Backbone,
   Handlebars,
+  EditTaskView,
+  EditTaskModel,
   mainTemplate
 ) {
   var task = Backbone.View.extend({
@@ -17,7 +21,7 @@ define([
 
       // The DOM events specific to an item.
       events: {
-
+        "click .task-edit-button": "onTaskEditClick",
       },
 
       initialize: function() {
@@ -29,6 +33,25 @@ define([
 
         this.$el.addClass('priority-' + this.model.get("priority"));
 
+
+
+        //this.model.on('change', this.someBloodyFunction);
+      },
+
+  
+
+      "mainTemplate":  Handlebars.compile(mainTemplate),
+
+      // Re-renders the titles of the todo item.
+      render: function() {
+        
+        this.$el.html(this.mainTemplate(this.model.attributes));
+        this.placeTaskCard();
+
+        return this;
+      },
+
+      placeTaskCard: function() {
         $('.story-card')
           .filter('[data-story-id="' + this.model.get('story_id') + '"]')
           .next('table')
@@ -36,13 +59,17 @@ define([
           .append(this.$el);
       },
 
-      "mainTemplate":  Handlebars.compile(mainTemplate),
+      onTaskEditClick: function() {
+        debugger;
+        
+        //var thisTaskModel = this.model;
 
-      // Re-renders the titles of the todo item.
-      render: function() {
-        this.$el.html(this.mainTemplate(this.model.attributes));
-
-        return this;
+        var editTask = new EditTaskView({
+          model: new EditTaskModel({
+            taskModel: this.model
+          })
+        });
+        
       }
   });
 

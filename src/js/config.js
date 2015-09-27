@@ -20,7 +20,9 @@ require.config({
         "taskModel": "js/models/task",
         "taskView": "js/views/task",
         "editStoryModel": "js/models/edit-story",
-        "editStoryView": "js/views/edit-story"
+        "editStoryView": "js/views/edit-story",
+        "editTaskModel": "js/models/edit-task",
+        "editTaskView": "js/views/edit-task"
      },
 
     deps: [

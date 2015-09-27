@@ -22,7 +22,8 @@ define([
       // The DOM events specific to an item.
       events: {
         "click .story-edit-button": "onStoryEditClick",
-        "click .story-delete-button": "onStoryDeleteClick"
+        "click .story-delete-button": "onStoryDeleteClick",
+        "click .new-task-button": "onNewTaskClick"
       },
 
       initialize: function() {
@@ -45,6 +46,9 @@ define([
         this.remove();
       },
 
+      onNewTaskClick: function() {
+        debugger;
+      },
 
       onStoryEditClick: function() {
      
