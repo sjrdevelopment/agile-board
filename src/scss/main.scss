@@ -1,4 +1,6 @@
-@import 'mixins.scss';
+@import 'helpers/mixins.scss';
+@import 'helpers/colours.scss';
+@import 'helpers/variables.scss';
 
 * {
 	box-sizing: border-box;
