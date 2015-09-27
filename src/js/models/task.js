@@ -20,7 +20,7 @@ define(['jquery', 'backbone'], function($, Backbone) {
 			//this.attributes = response[0];
 			
 		},
-		
+
 		setPriority: function(options, response) {
 			
 			if (options && options.newModel) {
@@ -46,9 +46,27 @@ define(['jquery', 'backbone'], function($, Backbone) {
 						this.set('isp2', false);
 						this.set('isp3', true);
 				break;
-				default: this.set('isp1', false);
+				default: this.set('isp1', true);
 						 this.set('isp2', false);
 						 this.set('isp3', false);
+			}
+
+			switch(this.get('status')) {
+				case 'to do': this.set('isToDo', true);
+						this.set('isInProgress', false);
+						this.set('isDone', false);
+				break;
+				case 'in progress': this.set('isToDo', false);
+						this.set('isInProgress', true);
+						this.set('isDone', false);
+				break;
+				case 'done': this.set('isToDo', false);
+						this.set('isInProgress', false);
+						this.set('isDone', true);
+				break;
+				default: this.set('isToDo', true);
+						this.set('isInProgress', false);
+						this.set('isDone', false);
 			}
 		},
 

@@ -9,9 +9,9 @@
 	
 	<label for="status">Status</label>
 	<select id="status" name="status" selected="{{status}}">
-		<option value="to do">To do</option>
-		<option value="in progress">In progress</option>
-		<option value="done">Done</option>
+		<option value="to do" {{#if isToDo}}selected="selected"{{/if}}>To do</option>
+		<option value="in progress" {{#if isInProgress}}selected="selected"{{/if}}>In progress</option>
+		<option value="done" {{#if isDone}}selected="selected"{{/if}}>Done</option>
 	</select>
 
 	<label for="description">Description</label>
