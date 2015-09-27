@@ -13,6 +13,7 @@ define(['jquery', 'backbone'], function($, Backbone) {
 			var dataChanged = {};
 
 			_.each(paramArray, function(element, index, list) {
+
 	    		if (storyModel.get(element.name) !== element.value) {
 	          		dataChanged[element.name] = element.value;
 	          	}

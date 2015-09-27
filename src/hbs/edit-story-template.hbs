@@ -1,5 +1,11 @@
 <h3>Edit story</h3>
 <form>
+	<label for="priority">Priority</label>
+	<select id="priority" name="priority" selected="{{priority}}">
+		<option value="1" {{#if isp1}}selected="selected"{{/if}}>1</option>
+		<option value="2" {{#if isp2}}selected="selected"{{/if}}>2</option>
+		<option value="3" {{#if isp3}}selected="selected"{{/if}}>3</option>
+	</select>
 
 	<label for="persona">As a</label>
 	<input type="text" name="persona" id="persona" value="{{persona}}" />
