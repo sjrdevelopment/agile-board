@@ -30,7 +30,7 @@ require([
     
 
     var addItemView = function(modelAdded) {
-    
+        debugger;
         var view = new StoryView({model: modelAdded});
 
         $('.board').append( view.render().el );
@@ -50,12 +50,12 @@ require([
 
     var renderTaskViews = function() {
      
-      _.each(tasks.models, function(taskModel, index) {
+      //_.each(tasks.models, function(taskModel, index) {
         debugger;
-        var view = new TaskView({model: taskModel});
+        //var view = new TaskView({model: taskModel});
 
         //$('.tasks').append( view.render().el );
-      });
+      //});
     };
 
     var showError = function(error) {
@@ -72,6 +72,7 @@ require([
 	        error: showError
 	    });
     });
+    
 
     $('.add-story-button').on('click', function(event){
     	$('html').addClass('overlay-active');

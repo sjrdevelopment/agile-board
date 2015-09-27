@@ -1,4 +1,4 @@
-define(['jquery', 'backbone'], function($, Backbone) {
+define(['jquery', 'backbone', 'taskView'], function($, Backbone, TaskView) {
 
 	var taskModel = Backbone.Model.extend({
 
@@ -7,7 +7,7 @@ define(['jquery', 'backbone'], function($, Backbone) {
 			this.urlRoot = 'v1/tasks';
 			this.idAttribute = 'id';
 
-			if (options.newModel) {
+			if (options && options.newModel) {
 				
 				
 			} else {
@@ -21,8 +21,19 @@ define(['jquery', 'backbone'], function($, Backbone) {
 			
 		},
 
+		showError: function(error) {
+			debugger;
+		},
+
+		setPrePriority: function(options, response) {
+			debugger;
+		},
+
 		setPriority: function(options, response) {
 			
+			debugger;
+			var view = new TaskView({model: this});
+
 			if (options && options.newModel) {
 
 				this.set('id', response);
@@ -71,11 +82,17 @@ define(['jquery', 'backbone'], function($, Backbone) {
 		},
 
 		syncWithApi:  function(changedAttributes) {
-			
 			if (!_.isEmpty(changedAttributes)) {
-			
-				this.save(changedAttributes, {patch:true, error: this.showError, success: _.bind(this.setPriority, this)});
+				changedAttributes.story_id = this.get('story_id');
 
+				
+				if(this.get('id')) {
+					debugger;
+					this.save(changedAttributes, {patch:true, error: this.showError, success: _.bind(this.setPrePriority, this)});
+				} else {
+					debugger;
+					this.save(changedAttributes, {error: this.showError, success: _.bind(this.setPriority, this)});
+				}
 			}
 		}
 

@@ -1,17 +1,17 @@
 define([
 	'jquery',
-	'backbone',
-	'tasksCollection'
+	'backbone'
 ], function(
 	$,
-	Backbone,
-	TasksCollection
+	Backbone
 ) {
 	var tasks;
 
 	var storyModel = Backbone.Model.extend({
 
 		initialize: function(attr, options) {
+
+			debugger;
 			//this.urlRoot = '/stories/' + this.get('id');
 			this.urlRoot = 'v1/stories';
 			this.idAttribute = 'id';

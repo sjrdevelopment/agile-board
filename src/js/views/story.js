@@ -4,14 +4,22 @@ define([
   'handlebars',
   'text!hbs/story-template.hbs',
   'editStoryView',
-  'editStoryModel'
+  'editStoryModel',
+  'taskModel',
+  'taskView',
+  'editTaskModel',
+  'editTaskView'
 ],function(
   $,
   Backbone,
   Handlebars,
   mainTemplate,
   EditStoryView,
-  EditStoryModel
+  EditStoryModel,
+  TaskModel,
+  TaskView,
+  EditTaskModel,
+  EditTaskView
 ) {
   var storyView = Backbone.View.extend({
 
@@ -35,7 +43,6 @@ define([
         
         this.listenTo(this.model.on('destroy', _.bind(this.removeView, this)));
 
-        window.myModel = this.model;
 
 
         this.model.on('change:modified', _.bind(this.render, this));
@@ -47,7 +54,28 @@ define([
       },
 
       onNewTaskClick: function() {
-        debugger;
+        $('html').addClass('overlay-active');
+        event.stopPropagation();
+
+        $('body').on('click:rem', function(event) {
+          if ( $(event.target).closest('.overlay').length === 0 ) {
+              $('html').removeClass('overlay-active');
+                  $('body').off('click:rem');
+          } 
+        });
+        
+
+        var newTaskModel = new TaskModel({}, {newModel: true});
+
+        var taskCreator = new EditTaskView({
+          model: new EditTaskModel({
+              taskModel: new TaskModel({
+                story_id: this.model.id
+              },{
+                newModel: true
+              })
+          })
+        });
       },
 
       onStoryEditClick: function() {

@@ -28,13 +28,13 @@ define([
         console.log('initialise tasks view');
 
         this.render();
-        this.listenTo(this.model.on('change', this.render.bind(this)));
 
 
         this.$el.addClass('priority-' + this.model.get("priority"));
 
 
-
+        this.listenTo(this.model.on('change:modified', this.render.bind(this)));
+        
         //this.model.on('change', this.someBloodyFunction);
       },
 
@@ -44,7 +44,10 @@ define([
 
       // Re-renders the titles of the todo item.
       render: function() {
-        
+        // *****
+        debugger; // task view render
+        // *****
+
         this.$el.html(this.mainTemplate(this.model.attributes));
         this.placeTaskCard();
 
