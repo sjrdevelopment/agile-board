@@ -1,102 +1,91 @@
-define(['jquery', 'backbone', 'taskView'], function($, Backbone, TaskView) {
+define(['backbone', 'taskView', 'constants'], function(Backbone, TaskView, constants) {
 
-	var taskModel = Backbone.Model.extend({
+    var PROPERTIES = constants.taskModel.properties,
+        taskModel;
 
-		initialize: function(attr, options) {
-			//this.urlRoot = '/stories/' + this.get('id');
-			this.urlRoot = 'v1/tasks';
-			this.idAttribute = 'id';
+    taskModel = Backbone.Model.extend({
 
-			if (options && options.newModel) {
-				
-				
-			} else {
-				this.setPriority();
-			}
-		},
+        initialize: function(attr, options) {
+            this.urlRoot = PROPERTIES.apiUrl;
+            this.idAttribute = PROPERTIES.idAttribute;
 
-		syncedModel: function(mod, response, options) {
-			debugger;
-			//this.attributes = response[0];
-			
-		},
+            if (!(options && options.newModel)) {
+                this.setPriority(); // or call setPriority.  if already has property set then don't re-set
+            }
+        },
 
-		showError: function(error) {
-			debugger;
-		},
+        syncedModel: function(mod, response, options) {
+            
+        },
 
-		setPrePriority: function(options, response) {
-			debugger;
-		},
+        showError: function(error) {
+    
+        },
 
-		setPriority: function(options, response) {
-			
-			debugger;
-			var view = new TaskView({model: this});
+        setPrePriority: function(options, response) {
 
-			if (options && options.newModel) {
+        },
 
-				this.set('id', response);
+        setPriority: function(options, response) {
+            var view = new TaskView({model: this});
 
-				this.fetch({
-					success: _.bind(this.syncedModel, this)
-				});
-			}
-		
+            if (options && options.newModel) {
+                this.set(PROPERTIES.idAttribute, response);
 
-			switch(parseInt(this.get('priority'), 10)) {
-				case 1: this.set('isp1', true);
-						this.set('isp2', false);
-						this.set('isp3', false);
-				break;
-				case 2: this.set('isp1', false);
-						this.set('isp2', true);
-						this.set('isp3', false);
-				break;
-				case 3: this.set('isp1', false);
-						this.set('isp2', false);
-						this.set('isp3', true);
-				break;
-				default: this.set('isp1', true);
-						 this.set('isp2', false);
-						 this.set('isp3', false);
-			}
+                this.fetch({
+                    success: _.bind(this.syncedModel, this)
+                });
+            }
 
-			switch(this.get('status')) {
-				case 'to do': this.set('isToDo', true);
-						this.set('isInProgress', false);
-						this.set('isDone', false);
-				break;
-				case 'in progress': this.set('isToDo', false);
-						this.set('isInProgress', true);
-						this.set('isDone', false);
-				break;
-				case 'done': this.set('isToDo', false);
-						this.set('isInProgress', false);
-						this.set('isDone', true);
-				break;
-				default: this.set('isToDo', true);
-						this.set('isInProgress', false);
-						this.set('isDone', false);
-			}
-		},
+            switch (parseInt(this.get(PROPERTIES.priority), 10)) {
+                case 1: this.set(PROPERTIES.isp1, true);
+                        this.set(PROPERTIES.isp2, false);
+                        this.set(PROPERTIES.isp3, false);
+                break;
+                case 2: this.set(PROPERTIES.isp1, false);
+                        this.set(PROPERTIES.isp2, true);
+                        this.set(PROPERTIES.isp3, false);
+                break;
+                case 3: this.set(PROPERTIES.isp1, false);
+                        this.set(PROPERTIES.isp2, false);
+                        this.set(PROPERTIES.isp3, true);
+                break;
+                default: this.set(PROPERTIES.isp1, true);
+                         this.set(PROPERTIES.isp2, false);
+                         this.set(PROPERTIES.isp3, false);
+            }
 
-		syncWithApi:  function(changedAttributes) {
-			if (!_.isEmpty(changedAttributes)) {
-				changedAttributes.story_id = this.get('story_id');
+            switch (this.get(PROPERTIES.status)) {
+                case 'to do': this.set(PROPERTIES.isToDo, true);
+                        this.set(PROPERTIES.isInProgress, false);
+                        this.set(PROPERTIES.isDone, false);
+                break;
+                case 'in progress': this.set(PROPERTIES.isToDo, false);
+                        this.set(PROPERTIES.isInProgress, true);
+                        this.set(PROPERTIES.isDone, false);
+                break;
+                case 'done': this.set(PROPERTIES.isToDo, false);
+                        this.set(PROPERTIES.isInProgress, false);
+                        this.set(PROPERTIES.isDone, true);
+                break;
+                default: this.set(PROPERTIES.isToDo, true);
+                        this.set(PROPERTIES.isInProgress, false);
+                        this.set(PROPERTIES.isDone, false);
+            }
+        },
 
-				
-				if(this.get('id')) {
-					debugger;
-					this.save(changedAttributes, {patch:true, error: this.showError, success: _.bind(this.setPrePriority, this)});
-				} else {
-					debugger;
-					this.save(changedAttributes, {error: this.showError, success: _.bind(this.setPriority, this)});
-				}
-			}
-		}
-
-	});
+        syncWithApi:  function(changedAttributes) {
+            if (!_.isEmpty(changedAttributes)) {
+                changedAttributes[PROPERTIES.storyID] = this.get(PROPERTIES.storyID);
+                
+                if (this.get(PROPERTIES.idAttribute)) {
+                    this.save(changedAttributes, {patch:true, error: this.showError, success: _.bind(this.setPrePriority, this)});
+                } else {
+                    this.save(changedAttributes, {error: this.showError, success: _.bind(this.setPriority, this)});
+                }
+            }
+        }
+    });
 
     return taskModel;
 });

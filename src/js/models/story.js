@@ -6,7 +6,6 @@ define(['backbone', 'constants'], function(Backbone, constants) {
     storyModel = Backbone.Model.extend({
 
         initialize: function(attr, options) {
-            debugger;
             this.urlRoot = PROPERTIES.apiUrl;
             this.idAttribute = PROPERTIES.idAttribute;
 

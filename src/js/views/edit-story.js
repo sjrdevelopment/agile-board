@@ -1,62 +1,73 @@
 define([
-  'jquery',
-  'underscore',
-  'backbone',
-  'handlebars',
-  'text!hbs/edit-story-template.hbs'
+    'jquery',
+    'underscore',
+    'backbone',
+    'handlebars',
+    'constants',
+    'text!hbs/edit-story-template.hbs'
 ],function(
-  $,
-  _,
-  Backbone,
-  Handlebars,
-  mainTemplate
+    $,
+    _,
+    Backbone,
+    Handlebars,
+    constants,
+    mainTemplate
 ) {
-  var editStory = Backbone.View.extend({
 
-      tagName: 'div',
+    var GENERIC_CLASSES = constants.genericClasses,
+        GENERIC_EVENTS = constants.genericEvents,
+        GENERIC_SELECTORS = constants.genericSelectors,
+        editStory,
+        $html,
+        $body;
+    
+    editStory = Backbone.View.extend({
+        tagName: 'div',
 
-      className: 'overlay-content',
-      // The DOM events specific to an item.
-      events: {
-        "click .save-button": "saveStoryChanges"
-      },
+        className: GENERIC_CLASSES.overlayContent,
+        //className: 'overlay-content',
 
-      initialize: function() {
+        events: {
+            'click .save-button': 'saveStoryChanges'
+        },
 
-        this.render();
-       
-      },
+        initialize: function() {
+            $html = $('html');
+            $body = $('body');
+            this.render();
+        },
 
-      saveStoryChanges: function() {
-        var paramArray = $('form').serializeArray();
+        saveStoryChanges: function() {
+            var paramArray = $('form').serializeArray();
 
-        this.model.updateStoryModel(paramArray);
+            this.model.updateStoryModel(paramArray);
 
-        $('html').removeClass('overlay-active');
-        $('body').off('click:closeOverlay');
+            $html.removeClass(GENERIC_CLASSES.overlayActive);
+            $body.off(GENERIC_EVENTS.closeOverlay);
+        },
 
-      },
+        mainTemplate:  Handlebars.compile(mainTemplate),
 
-      "mainTemplate":  Handlebars.compile(mainTemplate),
+        render: function() {
+            this.$el.html(this.mainTemplate(this.model.attributes));
 
-      // Re-renders the titles of the todo item.
-      render: function() {
-        this.$el.html(this.mainTemplate(this.model.attributes));
-        $('.overlay').html(this.$el);
-        $('html').addClass('overlay-active');
-        debugger;
-        //window.stopPropagation();
+            $(GENERIC_SELECTORS.overlay).html(this.$el);
+            $html.addClass(GENERIC_CLASSES.overlayActive);
+            
+            //window.stopPropagation();
 
-        /*$('body').on('click:closeOverlay', function(event) {
-          if ( $(event.target).closest('.overlay').length === 0 ) {
-              $('html').removeClass('overlay-active');
-          } 
-        });
-*/
-        return this;
-      }
-  });
+            $body.on(GENERIC_EVENTS.closeOverlay, function(event) {
 
-  return editStory;
+                if ( $(event.target).closest(GENERIC_SELECTORS.overlay).length === 0 ) {
+                    $html.removeClass(GENERIC_CLASSES.overlayActive);
+                } 
+            });
+            
+
+            return this;
+        }
+    });
+
+    return editStory;
 
 });
