@@ -104,14 +104,14 @@ define([
 
         onStoryDeleteClick: function() {
             var warningMessage = confirm(
-                'Are you sure you want to delete the story "As a '
-                    + this.model.get(PROPERTIES.persona)
-                    + ' I want to '
-                    + this.model.get(PROPERTIES.feature)
-                    + '..."'
+                'Are you sure you want to delete the story "As a ' + 
+                    this.model.get(PROPERTIES.persona) +
+                    ' I want to ' +
+                    this.model.get(PROPERTIES.feature) +
+                    '..."'
             );
             
-            if (warningMessage == true) {
+            if (warningMessage === true) {
                 this.model.destroy();
             } else {
                 return;

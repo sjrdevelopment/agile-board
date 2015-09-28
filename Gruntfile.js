@@ -76,7 +76,20 @@ module.exports = function(grunt) {
             options: {
                 livereload: true
             }
-        }
+        },
+
+        jshint: {
+            files: ['src/js/*.js', 'src/js/collections/*.js', 'src/js/models/*.js', 'src/js/views/*.js'],
+            options: {
+                curly: true,
+                eqeqeq: true,
+                eqnull: true,
+                browser: true,
+                globals: {
+                    jQuery: true
+                },
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-copy');
@@ -84,7 +97,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['requirejs', 'sass', 'copy', 'watch'/*, 'connect' */]);
-    grunt.registerTask('deploy', ['requirejs', 'sass', 'copy']);
+    grunt.registerTask('default', ['jshint', 'requirejs', 'sass', 'copy', 'watch'/*, 'connect' */]);
+    grunt.registerTask('deploy', ['jshint', 'requirejs', 'sass', 'copy']);
 }

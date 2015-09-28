@@ -25,7 +25,7 @@ define([
         className: GENERIC_CLASSES.overlayContent,
 
         events: {
-            "click .save-button": "saveTaskChanges"
+            'click .save-button': 'saveTaskChanges'
         },
 
         initialize: function() {
@@ -44,15 +44,14 @@ define([
             $body.off(GENERIC_EVENTS.closeOverlay);
         },
 
-        "mainTemplate":  Handlebars.compile(mainTemplate),
+        mainTemplate:  Handlebars.compile(mainTemplate),
 
-        // Re-renders the titles of the todo item.
         render: function() {
             this.$el.html(this.mainTemplate(this.model.attributes));
             $(GENERIC_SELECTORS.overlay).html(this.$el);
             $html.addClass(GENERIC_CLASSES.overlayActive);
       
-            //window.stopPropagation();
+            window.event.stopPropagation();
 
             $body.on(GENERIC_EVENTS.closeOverlay, function(event) {
                 if ($(event.target).closest(GENERIC_SELECTORS.overlay).length === 0 ) {

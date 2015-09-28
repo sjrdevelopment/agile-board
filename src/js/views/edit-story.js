@@ -23,7 +23,6 @@ define([
         tagName: 'div',
 
         className: GENERIC_CLASSES.overlayContent,
-        //className: 'overlay-content',
 
         events: {
             'click .save-button': 'saveStoryChanges'
@@ -53,7 +52,7 @@ define([
             $(GENERIC_SELECTORS.overlay).html(this.$el);
             $html.addClass(GENERIC_CLASSES.overlayActive);
             
-            //window.stopPropagation();
+            window.event.stopPropagation();
 
             $body.on(GENERIC_EVENTS.closeOverlay, function(event) {
 
@@ -61,7 +60,6 @@ define([
                     $html.removeClass(GENERIC_CLASSES.overlayActive);
                 } 
             });
-            
 
             return this;
         }

@@ -1,6 +1,5 @@
 require([
     'jquery',
-    'underscore',
     'backbone',
     'storyView',
     'storyModel',
@@ -8,10 +7,10 @@ require([
     'tasksCollection',
     'taskView',
     'editStoryView',
-    'editStoryModel'
+    'editStoryModel',
+    'constants'
 ], function (
     $,
-    _,
     Backbone,
     StoryView,
     StoryModel,
@@ -19,96 +18,68 @@ require([
     TasksCollection,
     TaskView,
     EditStoryView,
-    EditStoryModel
+    EditStoryModel,
+    constants
 ) {
-	Backbone.history.start();
+    var stories,
+        tasks,
+        addItemView,
+        showError,
+        GENERIC_CLASSES = constants.genericClasses,
+        GENERIC_EVENTS = constants.genericEvents,
+        GENERIC_SELECTORS = constants.genericSelectors,
+        $html = $('html'),
+        $body = $('body');
 
-    var stories = new StoriesCollection();
-	var tasks = new TasksCollection();
+    Backbone.history.start();
 
+    stories = new StoriesCollection();
+    tasks = new TasksCollection();
 
-    
-
-    var addItemView = function(modelAdded) {
-        debugger;
+    addItemView = function(modelAdded) {
         var view = new StoryView({model: modelAdded});
 
-        $('.board').append( view.render().el );
+        $(GENERIC_SELECTORS.board).append( view.render().el );
     };
 
-    stories.on("add", addItemView, this);
-
-	var renderStoryViews = function() {
-     
-      //_.each(stories.models, function(storyModel, index) {
-
-       // var view = new StoryView({model: storyModel});
-
-      //  $('.board').append( view.render().el ); //need to render()?
-      //});
+    showError = function(error) {
+        console.log(error);
     };
 
-    var renderTaskViews = function() {
-     
-      //_.each(tasks.models, function(taskModel, index) {
-        debugger;
-        //var view = new TaskView({model: taskModel});
-
-        //$('.tasks').append( view.render().el );
-      //});
-    };
-
-    var showError = function(error) {
-    	console.log(error);
-    };
-
+    stories.on('add', addItemView, this);
  
-	stories.fetch({
-        success: renderStoryViews,
+    stories.fetch({
         error: showError
     }).done(function(){
-    	tasks.fetch({
-	        success: renderTaskViews,
-	        error: showError
-	    });
+        tasks.fetch({
+            error: showError
+        });
     });
     
 
-    $('.add-story-button').on('click', function(event){
-    	$('html').addClass('overlay-active');
-    	event.stopPropagation();
+    $(GENERIC_SELECTORS.addStoryButton).on('click', function(event) {
+        var newStoryModel,
+            editStory;
 
-    	$('body').on('click:rem', function(event) {
-    		if ( $(event.target).closest('.overlay').length === 0 ) {
-		        $('html').removeClass('overlay-active');
-                $('body').off('click:rem');
-		    } 
-    	});
-        
-    	// create new view for modal
-        /*
-        var newStory = new StoryView({
-            model: new StoryModel({}, {newModel: true})
+        $html.addClass(GENERIC_CLASSES.overlayActive);
+        event.stopPropagation();
+
+        $body.on(GENERIC_EVENTS.closeOverlay, function(event) {
+            if ($(event.target).closest(GENERIC_SELECTORS.overlay).length === 0 ) {
+                $html.removeClass(GENERIC_CLASSES.overlayActive);
+                $body.off(GENERIC_EVENTS.closeOverlay);
+            } 
         });
-        */
+        
+        newStoryModel = new StoryModel({}, {newModel: true});
 
-        var newStoryModel = new StoryModel({}, {newModel: true});
-
-        var editStory = new EditStoryView({
-          model: new EditStoryModel({
+        editStory = new EditStoryView({
+            model: new EditStoryModel({
                 storyModel: newStoryModel
             }, {
                 storiesCollection: stories
             }
           )
         });
-
-
-
-
-
-    		// append view $el to .overlay
     });
-	
-	
 });

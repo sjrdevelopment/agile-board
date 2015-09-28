@@ -70,12 +70,12 @@ define([
 
         onTaskDeleteClick: function() {
             var warningMessage = confirm(
-                'Are you sure you want to delete the task "'
-                    + this.model.get(PROPERTIES.description)
-                    + '"?'
+                'Are you sure you want to delete the task "' +
+                    this.model.get(PROPERTIES.description) +
+                    '"?'
             );
             
-            if (warningMessage == true) {
+            if (warningMessage === true) {
                 this.model.destroy();
             } else {
                 return;

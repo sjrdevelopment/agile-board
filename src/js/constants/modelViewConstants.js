@@ -15,7 +15,9 @@ define(
             },
 
             genericSelectors: {
-                overlay: '.overlay'
+                overlay: '.overlay',
+                board: '.board',
+                addStoryButton: '.add-story-button'
             },
 
             editStoryModel: {

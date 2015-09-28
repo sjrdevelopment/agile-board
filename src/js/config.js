@@ -13,7 +13,6 @@ require.config({
         "constants": "js/constants/modelViewConstants",
 
         // components
-        "appController": "js/app-controller",
         "storiesCollection": "js/collections/stories",
         "storyModel": "js/models/story",
         "storyView": "js/views/story",
