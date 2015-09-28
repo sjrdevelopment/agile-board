@@ -1,97 +1,88 @@
 define([
-  'jquery',
-  'backbone',
-  'handlebars',
-  'editTaskView',
-  'editTaskModel',
-  'text!hbs/task-template.hbs'
+    'jquery',
+    'backbone',
+    'handlebars',
+    'editTaskView',
+    'editTaskModel',
+    'constants',
+    'text!hbs/task-template.hbs'
 ],function(
-  $,
-  Backbone,
-  Handlebars,
-  EditTaskView,
-  EditTaskModel,
-  mainTemplate
+    $,
+    Backbone,
+    Handlebars,
+    EditTaskView,
+    EditTaskModel,
+    constants,
+    mainTemplate
 ) {
-  var task = Backbone.View.extend({
 
-      tagName: 'div',
-      
-      className: 'task-card',
+    var CSS_CLASSES = constants.task.cssClasses,
+        PROPERTIES = constants.task.properties,
+        task; 
 
-      // The DOM events specific to an item.
-      events: {
-        "click .task-edit-button": "onTaskEditClick",
-        "click .task-delete-button": "onTaskDeleteClick"
-      },
+    task = Backbone.View.extend({
+        tagName: 'div',
 
-      initialize: function() {
-        console.log('initialise tasks view');
+        className: CSS_CLASSES.taskCard,
 
-        this.render();
+        events: {
+            'click .task-edit-button': 'onTaskEditClick',
+            'click .task-delete-button': 'onTaskDeleteClick'
+        },
 
+        initialize: function() {
+            this.render();
 
-        this.$el.addClass('priority-' + this.model.get("priority"));
+            this.$el.addClass('priority-' + this.model.get(PROPERTIES.priority));
 
+            this.listenTo(this.model.on('change:modified', this.render.bind(this)));
+            this.listenTo(this.model.on('destroy', _.bind(this.removeView, this)));
+        },
 
-        this.listenTo(this.model.on('change:modified', this.render.bind(this)));
+        removeView: function() {
+            this.remove();
+        },
 
-        this.listenTo(this.model.on('destroy', _.bind(this.removeView, this)));
+        mainTemplate:  Handlebars.compile(mainTemplate),
 
-       
-      },
+        render: function() {
+            this.$el.html(this.mainTemplate(this.model.attributes));
+            this.placeTaskCard();
 
-      removeView: function() {
-        this.remove();
-      },
+            return this;
+        },
 
-      "mainTemplate":  Handlebars.compile(mainTemplate),
+        placeTaskCard: function() {
+            $('.story-card')
+                .filter('[data-story-id="' + this.model.get(PROPERTIES.storyID) + '"]')
+                .next('table')
+                .find('.status-' + this.model.get(PROPERTIES.status).replace(/\s+/g, ''))
+                .append(this.$el);
+        },
 
-      // Re-renders the titles of the todo item.
-      render: function() {
-        // *****
-        debugger; // task view render
-        // *****
+        onTaskEditClick: function() {
+            var editTask = new EditTaskView({
+                model: new EditTaskModel({
+                    taskModel: this.model
+                })
+            });
+        },
 
-        this.$el.html(this.mainTemplate(this.model.attributes));
-        this.placeTaskCard();
-
-        return this;
-      },
-
-      placeTaskCard: function() {
-        $('.story-card')
-          .filter('[data-story-id="' + this.model.get('story_id') + '"]')
-          .next('table')
-          .find('.status-' + this.model.get('status').replace(/\s+/g, ''))
-          .append(this.$el);
-      },
-
-      onTaskEditClick: function() {
-        debugger;
-        
-        //var thisTaskModel = this.model;
-
-        var editTask = new EditTaskView({
-          model: new EditTaskModel({
-            taskModel: this.model
-          })
-        });
-        
-      },
-
-      onTaskDeleteClick: function() {
-        var r = confirm('Are you sure you want to delete the task "' + this.model.get('description') + '"?');
-        if (r == true) {
-            this.model.destroy();
-        } else {
-            return;
+        onTaskDeleteClick: function() {
+            var warningMessage = confirm(
+                'Are you sure you want to delete the task "'
+                    + this.model.get(PROPERTIES.description)
+                    + '"?'
+            );
+            
+            if (warningMessage == true) {
+                this.model.destroy();
+            } else {
+                return;
+            }
         }
-        
-      }
+    });
 
-  });
-
-  return task;
+    return task;
 
 });

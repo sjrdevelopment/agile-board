@@ -3,7 +3,16 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     
 	copy: {
-      
+		html: {
+			files: [
+			    {
+			    	flatten: true,
+			    	expand: true,
+			        src: ['src/html/index.html'],
+			        dest: 'api/public/'
+			    }
+			]
+		}
     },
     
 	/*
@@ -76,7 +85,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-  grunt.registerTask('default', ['requirejs', 'sass', 'watch'/*, 'connect' */]);
+  grunt.registerTask('default', ['requirejs', 'sass', 'copy', 'watch'/*, 'connect' */]);
+	
+  grunt.registerTask('deploy', ['requirejs', 'sass', 'copy']);
 
-  //grunt.registerTask('dist', ['sass:dist', 'copy:dist']);
 }

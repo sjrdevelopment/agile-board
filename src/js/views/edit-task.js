@@ -1,63 +1,69 @@
 define([
-  'jquery',
-  'underscore',
-  'backbone',
-  'handlebars',
-  'text!hbs/edit-task-template.hbs'
+    'jquery',
+    'backbone',
+    'handlebars',
+    'constants',
+    'text!hbs/edit-task-template.hbs'
 ],function(
-  $,
-  _,
-  Backbone,
-  Handlebars,
-  mainTemplate
+    $,
+    Backbone,
+    Handlebars,
+    constants,
+    mainTemplate
 ) {
-  var editTask = Backbone.View.extend({
 
-      tagName: 'div',
+    var GENERIC_CLASSES = constants.genericClasses,
+        GENERIC_EVENTS = constants.genericEvents,
+        GENERIC_SELECTORS = constants.genericSelectors,
+        editTask,
+        $html,
+        $body;
+    
+    editTask = Backbone.View.extend({
+        tagName: 'div',
 
-      className: 'overlay-content',
-      // The DOM events specific to an item.
-      events: {
-        "click .save-button": "saveTaskChanges"
-      },
+        className: GENERIC_CLASSES.overlayContent,
 
-      initialize: function() {
-        debugger;
-        this.render();
-       
-      },
+        events: {
+            "click .save-button": "saveTaskChanges"
+        },
 
-      saveTaskChanges: function() {
-        var paramArray = $('form').serializeArray();
+        initialize: function() {
+            $html = $('html');
+            $body = $('body');
 
-        debugger;
-        this.model.updateTaskModel(paramArray);
+            this.render();
+        },
 
-        $('html').removeClass('overlay-active');
-        $('body').off('click:closeOverlay');
+        saveTaskChanges: function() {
+            var paramArray = $('form').serializeArray();
 
-      },
+            this.model.updateTaskModel(paramArray);
 
-      "mainTemplate":  Handlebars.compile(mainTemplate),
+            $html.removeClass(GENERIC_CLASSES.overlayActive);
+            $body.off(GENERIC_EVENTS.closeOverlay);
+        },
 
-      // Re-renders the titles of the todo item.
-      render: function() {
-        this.$el.html(this.mainTemplate(this.model.attributes));
-        $('.overlay').html(this.$el);
-        $('html').addClass('overlay-active');
-        debugger;
-        //window.stopPropagation();
+        "mainTemplate":  Handlebars.compile(mainTemplate),
 
-        /*$('body').on('click:closeOverlay', function(event) {
-          if ( $(event.target).closest('.overlay').length === 0 ) {
-              $('html').removeClass('overlay-active');
-          } 
-        });
-*/
-        return this;
-      }
-  });
+        // Re-renders the titles of the todo item.
+        render: function() {
+            this.$el.html(this.mainTemplate(this.model.attributes));
+            $(GENERIC_SELECTORS.overlay).html(this.$el);
+            $html.addClass(GENERIC_CLASSES.overlayActive);
+      
+            //window.stopPropagation();
 
-  return editTask;
+            $body.on(GENERIC_EVENTS.closeOverlay, function(event) {
+                if ($(event.target).closest(GENERIC_SELECTORS.overlay).length === 0 ) {
+                    $html.removeClass(GENERIC_CLASSES.overlayActive);
+                } 
+            });
+            
+            return this;
+        }
+    });
+
+    return editTask;
 
 });

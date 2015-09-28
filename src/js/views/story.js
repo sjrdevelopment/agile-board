@@ -1,117 +1,132 @@
 define([
-  'jquery',
-  'backbone',
-  'handlebars',
-  'text!hbs/story-template.hbs',
-  'editStoryView',
-  'editStoryModel',
-  'taskModel',
-  'taskView',
-  'editTaskModel',
-  'editTaskView'
+    'jquery',
+    'backbone',
+    'handlebars',
+    'text!hbs/story-template.hbs',
+    'editStoryView',
+    'editStoryModel',
+    'taskModel',
+    'taskView',
+    'editTaskModel',
+    'editTaskView',
+    'constants'
 ],function(
-  $,
-  Backbone,
-  Handlebars,
-  mainTemplate,
-  EditStoryView,
-  EditStoryModel,
-  TaskModel,
-  TaskView,
-  EditTaskModel,
-  EditTaskView
+    $,
+    Backbone,
+    Handlebars,
+    mainTemplate,
+    EditStoryView,
+    EditStoryModel,
+    TaskModel,
+    TaskView,
+    EditTaskModel,
+    EditTaskView,
+    constants
 ) {
-  var storyView = Backbone.View.extend({
 
-      tagName: 'div',
-      
-      className: 'story-row',
+    var GENERIC_CLASSES = constants.genericClasses,
+        GENERIC_EVENTS = constants.genericEvents,
+        GENERIC_SELECTORS = constants.genericSelectors,
+        CSS_CLASSES = constants.story.cssClasses,
+        PROPERTIES = constants.story.properties,
+        storyView,
+        $html,
+        $body;
+    
+    storyView = Backbone.View.extend({
+        tagName: 'div',
 
-      // The DOM events specific to an item.
-      events: {
-        "click .story-edit-button": "onStoryEditClick",
-        "click .story-delete-button": "onStoryDeleteClick",
-        "click .new-task-button": "onNewTaskClick"
-      },
+        className: CSS_CLASSES.storyRow,
 
-      initialize: function() {
-        console.log('initialise view');
-        // this.render();
+        events: {
+            'click .story-edit-button': 'onStoryEditClick',
+            'click .story-delete-button': 'onStoryDeleteClick',
+            'click .new-task-button': 'onNewTaskClick'
+        },
 
-        // check this?
-        this.listenTo(this.model.on('change', this.render.bind(this))); 
-        
-        this.listenTo(this.model.on('destroy', _.bind(this.removeView, this)));
+        initialize: function() {
+            $html = $('html');
+            $body = $('body');
+            
+            // need all of these?
+            this.listenTo(this.model.on('change', this.render.bind(this))); 
+            this.listenTo(this.model.on('destroy', _.bind(this.removeView, this)));
+            this.model.on('change:modified', _.bind(this.render, this));
+        },
 
+        removeView: function() {
+            this.remove();
+        },
 
+        onNewTaskClick: function(event) {
+            var storyID,
+                newTaskModel,
+                taskCreator;
 
-        this.model.on('change:modified', _.bind(this.render, this));
+            $html.addClass(GENERIC_CLASSES.overlayActive);
+            
+            event.stopPropagation();
 
-      },
+            $body.on(GENERIC_EVENTS.closeOverlay, function(event) {
+                if ( $(event.target).closest(GENERIC_SELECTORS.overlay).length === 0 ) {
+                    $html.removeClass(GENERIC_CLASSES.overlayActive);
+                    $body.off(GENERIC_EVENTS.closeOverlay);
+                } 
+            });
 
-      removeView: function() {
-        this.remove();
-      },
+            storyID = this.model.get(PROPERTIES.idAttribute);
+         
+            newTaskModel = new TaskModel({}, {newModel: true});
 
-      onNewTaskClick: function() {
-        $('html').addClass('overlay-active');
-        event.stopPropagation();
+            taskCreator = new EditTaskView({
+                model: new EditTaskModel({
+                    taskModel: new TaskModel({
+                        story_id: storyID
+                    },{
+                        newModel: true
+                    })
+                })
+            });
+        },
 
-        $('body').on('click:rem', function(event) {
-          if ( $(event.target).closest('.overlay').length === 0 ) {
-              $('html').removeClass('overlay-active');
-                  $('body').off('click:rem');
-          } 
-        });
-        
-        var storyID = this.model.get('id');
-        debugger;
+        onStoryEditClick: function() {
+            var thisStoryModel,
+                editStory;
 
-        var newTaskModel = new TaskModel({}, {newModel: true});
+            thisStoryModel = this.model;
 
-        var taskCreator = new EditTaskView({
-          model: new EditTaskModel({
-              taskModel: new TaskModel({
-                story_id: storyID
-              },{
-                newModel: true
-              })
-          })
-        });
-      },
+            editStory = new EditStoryView({
+                model: new EditStoryModel({
+                    storyModel: thisStoryModel
+                })
+            });
+        },
 
-      onStoryEditClick: function() {
-     
-        var thisStoryModel = this.model;
+        onStoryDeleteClick: function() {
+            var warningMessage = confirm(
+                'Are you sure you want to delete the story "As a '
+                    + this.model.get(PROPERTIES.persona)
+                    + ' I want to '
+                    + this.model.get(PROPERTIES.feature)
+                    + '..."'
+            );
+            
+            if (warningMessage == true) {
+                this.model.destroy();
+            } else {
+                return;
+            }
+        },
 
-        var editStory = new EditStoryView({
-          model: new EditStoryModel({
-            storyModel: thisStoryModel
-          })
-        });
-      },
+        mainTemplate:  Handlebars.compile(mainTemplate),
 
-      onStoryDeleteClick: function() {
-        var r = confirm('Are you sure you want to delete the story "As a ' + this.model.get('persona') + ' I want to ' + this.model.get('feature') + '..."');
-        if (r == true) {
-            this.model.destroy();
-        } else {
-            return;
+        render: function() {
+            this.$el.html(this.mainTemplate(this.model.attributes));
+
+            return this;
         }
-        
-      },
 
-      "mainTemplate":  Handlebars.compile(mainTemplate),
-
-      // Re-renders the titles of the todo item.
-      render: function() {
-        
-        this.$el.html(this.mainTemplate(this.model.attributes));
-      
-        return this;
-        
-      }
-  });
+    });
 
   return storyView;
 

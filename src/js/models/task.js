@@ -1,6 +1,6 @@
 define(['backbone', 'taskView', 'constants'], function(Backbone, TaskView, constants) {
 
-    var PROPERTIES = constants.taskModel.properties,
+    var PROPERTIES = constants.task.properties,
         taskModel;
 
     taskModel = Backbone.Model.extend({

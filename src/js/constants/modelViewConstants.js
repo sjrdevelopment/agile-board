@@ -18,18 +18,6 @@ define(
                 overlay: '.overlay'
             },
 
-            storiesCollection: {
-                properties: {
-                    apiUrl: '/v1/stories'
-                }
-            },
-
-            tasksCollection: {
-                properties: {
-                    apiUrl: '/v1/tasks'
-                }
-            },
-
             editStoryModel: {
                 properties: {
                     storyModel: 'storyModel'
@@ -42,18 +30,23 @@ define(
                 }
             },
 
-            storyModel: {
+            story: {
                 properties: {
                     apiUrl: '/v1/stories',
                     idAttribute: 'id',
                     priority: 'priority',
                     isp1: 'isp1',
                     isp2: 'isp2',
-                    isp3: 'isp3'
+                    isp3: 'isp3',
+                    persona: 'persona',
+                    feature: 'feature'
+                },
+                cssClasses: {
+                    storyRow: 'story-row'
                 }
             },
 
-            taskModel: {
+            task: {
                 properties: {
                     apiUrl: '/v1/tasks',
                     idAttribute: 'id',
@@ -65,13 +58,11 @@ define(
                     isToDo: 'isToDo',
                     isInProgress: 'isInProgress',
                     isDone: 'isDone',
-                    storyID: 'story_id'
-                }
-            },
-
-            editStoryView: {
+                    storyID: 'story_id',
+                    description: 'description'
+                },
                 cssClasses: {
-                    overlayContent: 'overlay-content'
+                    taskCard: 'task-card'
                 }
             }
         };

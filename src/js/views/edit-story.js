@@ -1,13 +1,11 @@
 define([
     'jquery',
-    'underscore',
     'backbone',
     'handlebars',
     'constants',
     'text!hbs/edit-story-template.hbs'
 ],function(
     $,
-    _,
     Backbone,
     Handlebars,
     constants,
@@ -34,6 +32,7 @@ define([
         initialize: function() {
             $html = $('html');
             $body = $('body');
+
             this.render();
         },
 
