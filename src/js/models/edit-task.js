@@ -1,41 +1,35 @@
-define(['jquery', 'backbone', 'taskModel'], function($, Backbone, TaskModel) {
-	
-	var editTaskModel = Backbone.Model.extend({
+define(['backbone', 'taskModel', 'constants'], function(Backbone, TaskModel, constants) {
+    
+    var PROPERTIES = constants.editTaskModel.properties,
+        editTaskModel;
+    
+    editTaskModel = Backbone.Model.extend({
 
-		initialize: function(attr, options) {
-			debugger;
-			if (this.get('taskModel')) {
-				_.extend(this.attributes, this.get('taskModel').attributes);
-			}
+        initialize: function(attr, options) {
+            if (this.get(PROPERTIES.taskModel)) {
+                _.extend(this.attributes, this.get(PROPERTIES.taskModel).attributes);
+            }
 
-			this.tasksCollection = options && options.tasksCollection;
-		},
+            this.tasksCollection = options && options.tasksCollection;
+        },
 
-		updateTaskModel: function(paramArray) {
-			var taskModel = this.get('taskModel');
-			
-			var dataChanged = {};
+        updateTaskModel: function(paramArray) {
+            var taskModel = this.get(PROPERTIES.taskModel),
+                dataChanged = {};
 
-			_.each(paramArray, function(element, index, list) {
+            _.each(paramArray, function(element, index, list) {
+                if (taskModel.get(element.name) !== element.value) {
+                    dataChanged[element.name] = element.value;      
+                } 
+            });
 
-	    		if (taskModel.get(element.name) !== element.value) {
-	          		dataChanged[element.name] = element.value;		
-	          	} /*
-	          	else {
-	          		dataChanged[element.name] = element.value;
-	          	}
-	          	*/
-	        });
-
-	        taskModel.syncWithApi(dataChanged);
-	        
-	        if (this.tasksCollection) {
-	         	this.tasksCollection.add(taskModel);
-	        }
-		
-		}
-
-	});
+            taskModel.syncWithApi(dataChanged);
+            
+            if (this.tasksCollection) {
+                this.tasksCollection.add(taskModel);
+            }
+        }
+    });
 
     return editTaskModel;
 });

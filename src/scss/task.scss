@@ -1,0 +1,16 @@
+@import 'helpers/mixins.scss';
+@import 'helpers/colours.scss';
+@import 'helpers/variables.scss';
+
+.task-card {
+	background-color: #59ABE3;
+	color: #fff;
+	padding: 10px;
+	border-radius: 5px;
+	display: block;
+	margin: 10px;
+
+	.task-description {
+		@include x-rem(font-size, 12px);
+	}
+}

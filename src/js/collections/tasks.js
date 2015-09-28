@@ -1,24 +1,18 @@
-define(['jquery', 'backbone', 'taskModel'], function($, Backbone, Task) {
-	//var api = 'http://localhost:3000/v1/stories',
-	//	Stories;
+define(['backbone', 'taskModel', 'constants'], function(Backbone, Task, constants) {
+    
+    var PROPERTIES = constants.tasksCollection.properties,
+        Tasks;
 
-	var Tasks = Backbone.Collection.extend({
+    Tasks = Backbone.Collection.extend({
+        model: Task,
 
-	  // Reference to this collection's model.
-	  "model": Task,
+        url: constants.apiBaseUrl + PROPERTIES.apiUrl
+        /*
+        initialize: function() {
+            this.url = 'http://localhost:3000/v1/tasks'; // test if it works without being in initialize
+        }
+        */
+    });
 
-	  "initialize": function(models, options) {
-	  	this.url = 'http://localhost:3000/v1/tasks';
-
-
-	  },
-	  //"url": api,
-/*
-	  "parse": function(response) {
-	    return response;
-	  }
-*/
-	});
-
-  return Tasks;
+    return Tasks;
 });

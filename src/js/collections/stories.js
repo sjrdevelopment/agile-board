@@ -1,21 +1,13 @@
-define(['jquery', 'backbone', 'storyModel'], function($, Backbone, Story) {
-	// var api = 'http://randomword.setgetgo.com/get.php',
-	var api = 'http://localhost:3000/v1/stories',
-		Stories;
+define(['backbone', 'storyModel', 'constants'], function(Backbone, Story, constants) {
+    
+    var PROPERTIES = constants.storiesCollection.properties,
+        Stories;
 
-	Stories = Backbone.Collection.extend({
+    Stories = Backbone.Collection.extend({
+        model: Story,
 
-	  // Reference to this collection's model.
-	  "model": Story,
+        url: constants.apiBaseUrl + PROPERTIES.apiUrl
+    });
 
-	  "url": api,
-
-	  /*"parse": function(response) {
-
-	    return response;
-	  }*/
-
-	});
-
-  return Stories;
+    return Stories;
 });

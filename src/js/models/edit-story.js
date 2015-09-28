@@ -1,41 +1,34 @@
-define(['jquery', 'backbone', 'storyModel'], function($, Backbone, StoryModel) {
-	
-	var editStoryModel = Backbone.Model.extend({
+define(['backbone', 'storyModel', 'constants'], function(Backbone, StoryModel, constants) {
+    var PROPERTIES = constants.editStoryModel.properties,
+        editStoryModel;
 
-		initialize: function(attr, options) {
-			debugger;
-			if (this.get('storyModel')) {
-				_.extend(this.attributes, this.get('storyModel').attributes);
-			}
+    editStoryModel = Backbone.Model.extend({
 
-			this.storiesCollection = options && options.storiesCollection;
-		},
+        initialize: function(attr, options) {
+            if (this.get(PROPERTIES.storyModel)) {
+                _.extend(this.attributes, this.get(PROPERTIES.storyModel).attributes);
+            }
 
-		updateStoryModel: function(paramArray) {
-			var storyModel = this.get('storyModel');
-			
-			var dataChanged = {};
+            this.storiesCollection = options && options.storiesCollection;
+        },
 
-			_.each(paramArray, function(element, index, list) {
+        updateStoryModel: function(paramArray) {
+            var storyModel = this.get(PROPERTIES.storyModel),
+                dataChanged = {};
 
-	    		if (storyModel.get(element.name) !== element.value) {
-	          		dataChanged[element.name] = element.value;		
-	          	} /*
-	          	else {
-	          		dataChanged[element.name] = element.value;
-	          	}
-	          	*/
-	        });
+            _.each(paramArray, function(element, index, list) {
+                if (storyModel.get(element.name) !== element.value) {
+                    dataChanged[element.name] = element.value;      
+                }
+            });
 
-	        storyModel.syncWithApi(dataChanged);
-	        
-	        if (this.storiesCollection) {
-	         	this.storiesCollection.add(storyModel);
-	        }
-		
-		}
-
-	});
+            storyModel.syncWithApi(dataChanged);
+            
+            if (this.storiesCollection) {
+                this.storiesCollection.add(storyModel);
+            }
+        }
+    });
 
     return editStoryModel;
 });

@@ -22,11 +22,12 @@ module.exports = function(grunt) {
 
 	sass: {
 		options: {
-			outputStyle: 'compact'
+			outputStyle: 'compact',
+			includePaths: ['src/scss']
 		},
 	      dist: {
 	        files: {
-	          'api/public/assets/css/main.css' : 'src/scss/*.scss'
+	          'api/public/assets/css/main.css' : 'src/scss/main.scss'
 	        }
 	      }
     },
