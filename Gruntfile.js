@@ -15,19 +15,27 @@ module.exports = function(grunt) {
             }
         },
         
-        /*
+
         connect: {
             server: {
               options: {
                 port: 9000,
-                base: 'public',
+                base: 'api/public',
                 open: {
-                    target: 'http://localhost:9000/html'
+                    target: 'http://localhost:9000'
+                }
+              }
+            },
+            jasmine: {
+              options: {
+                port: 8000,
+                open: {
+                    target: 'http://localhost:8000/_SpecRunner.html'
                 }
               }
             }
         },
-        */
+
 
         sass: {
             options: {
@@ -89,6 +97,62 @@ module.exports = function(grunt) {
                     jQuery: true
                 },
             }
+        },
+
+        jasmine: {
+            yourTask: {
+                options: {
+                    src: 'src/js/**/*.js',
+                    specs: 'src/js/**/tests/*spec.js',
+                    host: 'http://localhost:8000/',
+                    template: require('grunt-template-jasmine-requirejs'),
+                    keepRunner: true,
+                    templateOptions: {
+                        requireConfig: {
+                            baseUrl: '.',
+                            paths: {
+                                // libs
+                                "jquery": "bower_components/jquery/dist/jquery.min",
+                                "underscore": "bower_components/underscore/underscore-min",
+                                "backbone": "bower_components/backbone/backbone-min",
+                                "handlebars": "bower_components/handlebars/handlebars.min",
+                                "requirejs": "bower_components/requirejs/require",
+                                "text": "bower_components/requirejs-text/text",
+
+                                // constants
+                                "constants": "src/js/constants/modelViewConstants",
+
+                                // components
+                                "storiesCollection": "src/js/collections/stories",
+                                "storyModel": "src/js/models/story",
+                                "storyView": "src/js/views/story",
+                                "tasksCollection": "src/js/collections/tasks",
+                                "taskModel": "src/js/models/task",
+                                "taskView": "src/js/views/task",
+                                "editStoryModel": "src/js/models/edit-story",
+                                "editStoryView": "src/js/views/edit-story",
+                                "editTaskModel": "src/js/models/edit-task",
+                                "editTaskView": "src/js/views/edit-task"
+                             },
+
+                            deps: [
+                                'jquery'
+                            ],
+
+                            shim: {
+                                backbone: {
+                                    deps: ['underscore', 'jquery'],
+                                    'exports': 'backbone'
+                                }
+                            },
+
+                            hbars: {
+                                extension: '.hbs'
+                            }
+                        }
+                    }
+                }
+            }
         }
     });
 
@@ -98,7 +162,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
 
-    grunt.registerTask('default', ['jshint', 'requirejs', 'sass', 'copy', 'watch'/*, 'connect' */]);
-    grunt.registerTask('deploy', ['jshint', 'requirejs', 'sass', 'copy']);
+    grunt.registerTask('default', ['jshint', 'jasmine', 'requirejs', 'sass', 'copy', 'connect', 'watch' ]); // comment out connect
+    grunt.registerTask('test', ['connect:jasmine', 'jasmine']);
+    grunt.registerTask('deploy', ['jshint', 'jasmine', 'requirejs', 'sass', 'copy']);
 }
