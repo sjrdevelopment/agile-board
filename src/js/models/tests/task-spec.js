@@ -2,12 +2,14 @@ define(
     [
         'backbone',
         'constants',
-        'taskModel'
+        'taskModel',
+        'taskView'
     ],
     function (
         Backbone,
         constants,
-        taskModel
+        taskModel,
+        TaskView
     ) {
         'use strict';
 
@@ -28,11 +30,11 @@ define(
 
             });
 
-            xdescribe('on syncWithApi', function() {
+            describe('on syncWithApi', function() {
                 var dummyChangedAttributes = {};
 
                 beforeEach(function() {
-                    model = new storyModel([], {
+                    model = new taskModel([], {
                         newModel: true
                     });
 
@@ -40,36 +42,37 @@ define(
 
                     dummyChangedAttributes = {
                         param: 'param value'
-                    }
+                    };
 
                     model.syncWithApi(dummyChangedAttributes);
                 });
 
                 it('should call Backbone model save() function', function() {
-
-
                     expect(model.save).toHaveBeenCalled();
                     expect(model.save.calls.argsFor(0)[0]).toEqual(dummyChangedAttributes);
                 });
             });
 
-            xdescribe('onSaveSuccess', function() {
+            describe('onNewTaskSaveSuccess', function() {
                 var attrs = {};
 
                 beforeEach(function() {
                     attrs[PROPERTIES.priority] = 1;
 
-                    model = new storyModel(attrs, {
+                    model = new taskModel(attrs, {
                         newModel: true
                     });
 
-                    spyOn(model, 'fetch');
+                    // We don't need to test the specifics of the view in this suite
+                    spyOn(TaskView.prototype, 'initialize').and.callFake(function() {
+                        return true;
+                    });
 
-                    model.onSaveSuccess();
+                    model.onNewTaskSaveSuccess();
                 });
 
-                it('as new model, should call Backbone fetch() to get further data from api', function() {
-                    expect(model.fetch).toHaveBeenCalled();
+                it('as new model, should invoke new view initialize() function', function() {
+                    expect(TaskView.prototype.initialize).toHaveBeenCalled();
                 })
             });
         });

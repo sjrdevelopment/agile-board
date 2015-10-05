@@ -24,11 +24,16 @@ define(['backbone', 'constants', 'underscore'], function(Backbone, constants, _)
 
         onSaveSuccess: function(options, response) {
             if (this.newModel) {
+                // need to fetch data from server if new, so story ID can be set
+                    // need story ID for adding tasks later.
 
                 this.set(PROPERTIES.idAttribute, response);
 
                 this.fetch();
             }
+
+            // if not a new model (editing), we will already know storyID
+
         },
 
         syncWithApi:  function(changedAttributes) {

@@ -112,49 +112,6 @@ module.exports = function(grunt) {
                         requireConfig: {
                             baseUrl: 'src'
                         }
-                         /*requireConfig: {
-                            baseUrl: '.',
-                            paths: {
-                                // libs
-                                "jquery": "bower_components/jquery/dist/jquery.min",
-                                "underscore": "bower_components/underscore/underscore-min",
-                                "backbone": "bower_components/backbone/backbone-min",
-                                "handlebars": "bower_components/handlebars/handlebars.min",
-                                "requirejs": "bower_components/requirejs/require",
-                                "text": "bower_components/requirejs-text/text",
-
-                                // constants
-                                "constants": "src/js/constants/modelViewConstants",
-
-                                // components
-                                "storiesCollection": "src/js/collections/stories",
-                                "storyModel": "src/js/models/story",
-                                "storyView": "src/js/views/story",
-                                "tasksCollection": "src/js/collections/tasks",
-                                "taskModel": "src/js/models/task",
-                                "taskView": "src/js/views/task",
-                                "editStoryModel": "src/js/models/edit-story",
-                                "editStoryView": "src/js/views/edit-story",
-                                "editTaskModel": "src/js/models/edit-task",
-                                "editTaskView": "src/js/views/edit-task"
-                             },
-
-                            deps: [
-                                'jquery'
-                            ],
-
-                            shim: {
-                                backbone: {
-                                    deps: ['underscore', 'jquery'],
-                                    'exports': 'backbone'
-                                }
-                            },
-
-                            hbars: {
-                                extension: '.hbs'
-                            }
-                        }
-                        */
                     }
                 }
             }
