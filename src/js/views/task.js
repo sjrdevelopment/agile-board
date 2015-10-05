@@ -21,6 +21,7 @@ define([
         task;
 
     task = Backbone.View.extend({
+
         tagName: 'div',
 
         className: CSS_CLASSES.taskCard,
@@ -81,6 +82,8 @@ define([
                 return;
             }
         }
+
+
     });
 
     return task;

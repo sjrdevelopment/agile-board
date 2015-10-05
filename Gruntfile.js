@@ -108,7 +108,11 @@ module.exports = function(grunt) {
                     template: require('grunt-template-jasmine-requirejs'),
                     keepRunner: true,
                     templateOptions: {
+                        requireConfigFile: 'src/js/config.js',
                         requireConfig: {
+                            baseUrl: 'src'
+                        }
+                         /*requireConfig: {
                             baseUrl: '.',
                             paths: {
                                 // libs
@@ -150,6 +154,7 @@ module.exports = function(grunt) {
                                 extension: '.hbs'
                             }
                         }
+                        */
                     }
                 }
             }

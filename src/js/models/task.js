@@ -15,7 +15,11 @@ define(['backbone', 'taskView', 'constants', 'underscore'], function(Backbone, T
         },
 
         onSaveSuccess: function(options, response) {
+
+            //chec this..
             var view = new TaskView({model: this});
+
+            // check the functionality of this...
 
             if (options && options.newModel) {
                 this.set(PROPERTIES.idAttribute, response);

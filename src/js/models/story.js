@@ -9,11 +9,17 @@ define(['backbone', 'constants', 'underscore'], function(Backbone, constants, _)
             this.urlRoot = PROPERTIES.apiUrl;
             this.idAttribute = PROPERTIES.idAttribute;
 
+            // what does this do again?
+            // tidy up...
             if (options && options.newModel) {
                 this.newModel = true;
             } else {
 
             }
+        },
+
+        showError: function(error) {
+            console.log(error);
         },
 
         onSaveSuccess: function(options, response) {

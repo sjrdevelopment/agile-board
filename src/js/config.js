@@ -8,7 +8,7 @@ require.config({
         "handlebars": "../bower_components/handlebars/handlebars.min",
         "requirejs": "../bower_components/requirejs/require",
         "text": "../bower_components/requirejs-text/text",
-    
+
         // constants
         "constants": "js/constants/modelViewConstants",
 
