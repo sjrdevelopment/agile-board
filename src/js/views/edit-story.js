@@ -19,7 +19,7 @@ define([
         $html,
         $body;
 
-    editStory = Backbone.View.extend({
+    EditStory = Backbone.View.extend({
         tagName: 'div',
 
         className: GENERIC_CLASSES.overlayContent,
@@ -65,6 +65,6 @@ define([
         }
     });
 
-    return editStory;
+    return EditStory;
 
 });

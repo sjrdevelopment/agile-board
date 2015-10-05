@@ -1,9 +1,9 @@
 define(['backbone', 'taskModel', 'constants'], function(Backbone, TaskModel, constants) {
     
     var PROPERTIES = constants.editTaskModel.properties,
-        editTaskModel;
+        EditTaskModel;
     
-    editTaskModel = Backbone.Model.extend({
+    EditTaskModel = Backbone.Model.extend({
 
         initialize: function(attr, options) {
             if (this.get(PROPERTIES.taskModel)) {
@@ -31,5 +31,5 @@ define(['backbone', 'taskModel', 'constants'], function(Backbone, TaskModel, con
         }
     });
 
-    return editTaskModel;
+    return EditTaskModel;
 });

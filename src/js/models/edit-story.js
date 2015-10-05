@@ -1,8 +1,8 @@
 define(['backbone', 'storyModel', 'constants'], function(Backbone, StoryModel, constants) {
     var PROPERTIES = constants.editStoryModel.properties,
-        editStoryModel;
+        EditStoryModel;
 
-    editStoryModel = Backbone.Model.extend({
+    EditStoryModel = Backbone.Model.extend({
 
         initialize: function(attr, options) {
             if (this.get(PROPERTIES.storyModel)) {
@@ -24,11 +24,11 @@ define(['backbone', 'storyModel', 'constants'], function(Backbone, StoryModel, c
 
             storyModel.syncWithApi(dataChanged);
             
-            if (this.storiesCollection) { // if a new story
+            if (this.storiesCollection) {
                 this.storiesCollection.add(storyModel);
             }
         }
     });
 
-    return editStoryModel;
+    return EditStoryModel;
 });

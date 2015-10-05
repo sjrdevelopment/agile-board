@@ -8,7 +8,7 @@ define(
     function (
         Backbone,
         constants,
-        taskModel,
+        TaskModel,
         TaskView
     ) {
         'use strict';
@@ -21,7 +21,7 @@ define(
             describe('On initialize', function() {
 
                 beforeEach(function() {
-                    model = new taskModel();
+                    model = new TaskModel();
                 });
 
                 it('should inherit from Backbone.Model', function() {
@@ -34,7 +34,7 @@ define(
                 var dummyChangedAttributes = {};
 
                 beforeEach(function() {
-                    model = new taskModel([], {
+                    model = new TaskModel([], {
                         newModel: true
                     });
 
@@ -59,7 +59,7 @@ define(
                 beforeEach(function() {
                     attrs[PROPERTIES.priority] = 1;
 
-                    model = new taskModel(attrs, {
+                    model = new TaskModel(attrs, {
                         newModel: true
                     });
 

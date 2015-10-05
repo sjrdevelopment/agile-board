@@ -5,7 +5,7 @@ define(
     ],
     function (
         Backbone,
-        tasksCollection
+        TasksCollection
     ) {
         'use strict';
 
@@ -13,14 +13,10 @@ define(
             var collection;
 
             beforeEach(function() {
-                collection = new tasksCollection();
-
-        
-                
+                collection = new TasksCollection();
             });
 
             describe('On initialize', function() {
-
                 it('should inherit from Backbone.Collection', function() {
                     expect(collection instanceof Backbone.Collection).toBe(true);
                 });
@@ -33,8 +29,6 @@ define(
                 beforeEach(function() {
                     dummyResponseArray = [null, 'a', 'b', null, 'c'];
                     expectedReturnArray = ['a', 'b', 'c'];
-
-                    spyOn(collection, 'parse').and.callThrough();
                 });
                 
                 it('should remove any null entries in collection', function() {

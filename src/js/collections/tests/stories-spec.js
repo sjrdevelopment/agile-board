@@ -5,7 +5,7 @@ define(
     ],
     function (
         Backbone,
-        storiesCollection
+        StoriesCollection
     ) {
         'use strict';
 
@@ -13,15 +13,10 @@ define(
             var collection;
 
             beforeEach(function() {
-                collection = new storiesCollection();
-
-             
-
-                
+                collection = new StoriesCollection();
             });
 
             describe('On initialize', function() {
-
                 it('should inherit from Backbone.Collection', function() {
                     expect(collection instanceof Backbone.Collection).toBe(true);
                 });
@@ -34,11 +29,9 @@ define(
                 beforeEach(function() {
                     dummyResponseArray = [null, 'a', 'b', null, 'c'];
                     expectedReturnArray = ['a', 'b', 'c'];
-
-                    spyOn(collection, 'parse').and.callThrough();
                 });
                 
-                it('should remove any null entries in collection', function() {
+                it('should remove any null entries in collection data', function() {
                     expect(collection.parse(dummyResponseArray)).toEqual(expectedReturnArray);
                 });
             });

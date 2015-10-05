@@ -7,9 +7,9 @@ define(
     ],
     function (
         Backbone,
-        editStoryModel,
-        storiesCollection,
-        storyModel
+        EditStoryModel,
+        StoriesCollection,
+        StoryModel
     ) {
         'use strict';
 
@@ -19,11 +19,11 @@ define(
                 mockStoriesCollection;
 
             beforeEach(function() {
-                mockStoriesCollection = new storiesCollection();
+                mockStoriesCollection = new StoriesCollection();
 
-                mockStoryModel = new storyModel();
+                mockStoryModel = new StoryModel();
 
-                model = new editStoryModel({
+                model = new EditStoryModel({
                         storyModel: mockStoryModel
                     },{
                         storiesCollection: mockStoriesCollection
@@ -59,7 +59,6 @@ define(
                     expect(mockStoriesCollection.add).toHaveBeenCalledWith(mockStoryModel);
                 });
             });
-
         });
     }
 );

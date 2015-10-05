@@ -7,7 +7,7 @@ define(
     function (
         Backbone,
         constants,
-        storyModel
+        StoryModel
     ) {
         'use strict';
 
@@ -19,23 +19,21 @@ define(
             describe('On initialize', function() {
 
                 beforeEach(function() {
-                    model = new storyModel([], {
+                    model = new StoryModel({}, {
                         newModel: true
                     });
                 });
 
-
                 it('should inherit from Backbone.Model', function() {
                     expect(model instanceof Backbone.Model).toBe(true);
                 });
-
             });
 
             describe('on syncWithApi', function() {
                 var dummyChangedAttributes = {};
 
                 beforeEach(function() {
-                    model = new storyModel([], {
+                    model = new StoryModel({}, {
                         newModel: true
                     });
 
@@ -49,8 +47,6 @@ define(
                 });
 
                 it('should call Backbone model save() function', function() {
-
-
                     expect(model.save).toHaveBeenCalled();
                     expect(model.save.calls.argsFor(0)[0]).toEqual(dummyChangedAttributes);
                 });
@@ -62,7 +58,7 @@ define(
                 beforeEach(function() {
                     attrs[PROPERTIES.priority] = 1;
 
-                    model = new storyModel(attrs, {
+                    model = new StoryModel(attrs, {
                         newModel: true
                     });
 

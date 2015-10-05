@@ -1,38 +1,30 @@
 define(
     [
+        'jquery',
         'backbone',
         'constants',
         'taskView',
-        'taskModel',
-        'jquery',
-        'handlebars',
-        'editTaskView',
-        'editTaskModel'
+        'taskModel'
     ],
     function (
+        $,
         Backbone,
         constants,
-        taskView,
-        taskModel,
-        $,
-        Handlebars,
-        EditTaskView,
-        EditTaskModel
+        TaskView,
+        TaskModel
     ) {
         'use strict';
 
-        var PROPERTIES = constants.task.properties,
-            GENERIC_CLASSES = constants.genericClasses;
+        var GENERIC_CLASSES = constants.genericClasses;
 
         describe('Task view', function() {
            var view;
 
             describe('On initialize', function() {
-
                 beforeEach(function() {
 
-                    view = new taskView({
-                        model: new taskModel({
+                    view = new TaskView({
+                        model: new TaskModel({
                             status: 'in progress'
                         })
                     });
@@ -49,24 +41,13 @@ define(
             });
 
             describe('onTaskDeleteClick function', function() {
-
                 beforeEach(function() {
-
-                    view = new taskView({
-                        model: new taskModel({
-                            status: 'in progress'
-                        })
-                    });
-                    
                     //mock a confirm box clicking ok
                     spyOn(window, 'confirm').and.returnValue(true);
-
                     spyOn(view.model, 'destroy');
 
                     view.onTaskDeleteClick();
                 });
-
-
 
                 it('should call window confirm function', function() {
                     expect(window.confirm).toHaveBeenCalled();

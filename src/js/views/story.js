@@ -29,11 +29,11 @@ define([
         GENERIC_SELECTORS = constants.genericSelectors,
         CSS_CLASSES = constants.story.cssClasses,
         PROPERTIES = constants.story.properties,
-        storyView,
+        StoryView,
         $html,
         $body;
 
-    storyView = Backbone.View.extend({
+    StoryView = Backbone.View.extend({
         tagName: 'div',
 
         className: CSS_CLASSES.storyRow,
@@ -48,9 +48,6 @@ define([
             $html = $('html');
             $body = $('body');
 
-            // need all of these?
-            //this.listenTo(this.model.on('change', this.render.bind(this)));
-            //this.listenTo(this.model.on('change', _.bind(this.render, this)));
             this.listenTo(this.model.on('destroy', _.bind(this.removeView, this)));
             this.model.on('change:modified', _.bind(this.render, this));
         },
@@ -118,10 +115,7 @@ define([
             );
 
             if (warningMessage === true) {
-            
-                this.model.destroy({success: function(model, response) {
-                   
-                }});
+                this.model.destroy();
             } else {
                 return;
             }
@@ -134,9 +128,8 @@ define([
 
             return this;
         }
-
     });
 
-  return storyView;
+  return StoryView;
 
 });

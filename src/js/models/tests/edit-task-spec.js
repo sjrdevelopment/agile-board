@@ -7,9 +7,9 @@ define(
     ],
     function (
         Backbone,
-        editTaskModel,
-        tasksCollection,
-        taskModel
+        EditTaskModel,
+        TasksCollection,
+        TaskModel
     ) {
         'use strict';
 
@@ -19,11 +19,11 @@ define(
                 mockTasksCollection;
 
             beforeEach(function() {
-                mockTasksCollection = new tasksCollection();
+                mockTasksCollection = new TasksCollection();
 
-                mockTaskModel = new taskModel();
+                mockTaskModel = new TaskModel();
 
-                model = new editTaskModel({
+                model = new EditTaskModel({
                         taskModel: mockTaskModel
                     },{
                         tasksCollection: mockTasksCollection
@@ -59,7 +59,6 @@ define(
                     expect(mockTasksCollection.add).toHaveBeenCalledWith(mockTaskModel);
                 });
             });
-
         });
     }
 );

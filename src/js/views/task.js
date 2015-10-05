@@ -18,9 +18,9 @@ define([
 
     var CSS_CLASSES = constants.task.cssClasses,
         PROPERTIES = constants.task.properties,
-        task;
+        TaskView;
 
-    task = Backbone.View.extend({
+    TaskView = Backbone.View.extend({
 
         tagName: 'div',
 
@@ -36,7 +36,6 @@ define([
 
             this.$el.addClass('priority-' + this.model.get(PROPERTIES.priority));
 
-            //this.listenTo(this.model.on('change:modified', this.render.bind(this)));
             this.listenTo(this.model.on('change:modified', _.bind(this.render, this)));
             
             this.listenTo(this.model.on('destroy', _.bind(this.removeView, this)));
@@ -85,10 +84,8 @@ define([
                 return;
             }
         }
-
-
     });
 
-    return task;
+    return TaskView;
 
 });
