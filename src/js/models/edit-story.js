@@ -24,7 +24,7 @@ define(['backbone', 'storyModel', 'constants'], function(Backbone, StoryModel, c
 
             storyModel.syncWithApi(dataChanged);
             
-            if (this.storiesCollection) {
+            if (this.storiesCollection) { // if a new story
                 this.storiesCollection.add(storyModel);
             }
         }

@@ -49,13 +49,28 @@ define([
             $body = $('body');
 
             // need all of these?
-            this.listenTo(this.model.on('change', this.render.bind(this)));
+            //this.listenTo(this.model.on('change', this.render.bind(this)));
+            //this.listenTo(this.model.on('change', _.bind(this.render, this)));
             this.listenTo(this.model.on('destroy', _.bind(this.removeView, this)));
             this.model.on('change:modified', _.bind(this.render, this));
         },
 
         removeView: function() {
             this.remove();
+        },
+
+        setupNewTaskModel: function(storyID) {
+            newTaskModel = new TaskModel({}, {newModel: true});
+
+            taskCreator = new EditTaskView({
+                model: new EditTaskModel({
+                    taskModel: new TaskModel({
+                        story_id: storyID
+                    },{
+                        newModel: true
+                    })
+                })
+            });
         },
 
         onNewTaskClick: function(event) {
@@ -76,17 +91,8 @@ define([
 
             storyID = this.model.get(PROPERTIES.idAttribute);
 
-            newTaskModel = new TaskModel({}, {newModel: true});
-
-            taskCreator = new EditTaskView({
-                model: new EditTaskModel({
-                    taskModel: new TaskModel({
-                        story_id: storyID
-                    },{
-                        newModel: true
-                    })
-                })
-            });
+            this.setupNewTaskModel(storyID);
+            
         },
 
         onStoryEditClick: function() {
@@ -112,7 +118,10 @@ define([
             );
 
             if (warningMessage === true) {
-                this.model.destroy();
+            
+                this.model.destroy({success: function(model, response) {
+                   
+                }});
             } else {
                 return;
             }
