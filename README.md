@@ -5,11 +5,14 @@
 The solution contains `api` and `src` directories.
 `src` is the self-contained solution.
 `api` is the server and contains the same code given in the challenge brief.
-It is assumed the api has been built as per the coding challenge instructions (all dependencies have been packaged with this submission already).
+
+It is assumed the api has been built as per the coding challenge instructions (cd into `api`, run `npm install` followed by `npm start` to setup the api, server and dependencies).
 
 ##### Steps
+
 1. In the solution's root directory run `npm install` followed by `bower install`
-2. Once all npm and bower components are installed, you can run `grunt deploy`, which will build and copy the solution's assets over to `api/public` (the web server's root directory)
+2. Once all npm and bower components are installed, you can run `grunt test` which will run the Jasmine tests in the terminal window, and also open the Spec Runner in the web browser port 8000.
+3. Next run `grunt deploy`, which will build and copy the solution's assets over to `api/public` (the web server's root directory)
 3. cd into `api`
 4. run `npm start` to run the server as per the coding challenge instructions.  This will start the api and the web server
 5. Go to `http://localhost:3000` in your browser and begin adding, editing and deleting stories and tasks

@@ -128,5 +128,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['jshint', 'requirejs', 'sass', 'copy', /*'connect:server',*/ 'watch' ]); // comment out connect
     grunt.registerTask('test', ['connect:jasmine', 'jasmine']);
-    grunt.registerTask('deploy', ['jshint', 'jasmine', 'requirejs', 'sass', 'copy']);
+    grunt.registerTask('deploy', ['jshint', 'requirejs', 'sass', 'copy']);
 }
