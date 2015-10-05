@@ -36,7 +36,9 @@ define([
 
             this.$el.addClass('priority-' + this.model.get(PROPERTIES.priority));
 
-            this.listenTo(this.model.on('change:modified', this.render.bind(this)));
+            //this.listenTo(this.model.on('change:modified', this.render.bind(this)));
+            this.listenTo(this.model.on('change:modified', _.bind(this.render, this)));
+            
             this.listenTo(this.model.on('destroy', _.bind(this.removeView, this)));
         },
 
@@ -54,6 +56,7 @@ define([
         },
 
         placeTaskCard: function() {
+            // use constants here
             $('.story-card')
                 .filter('[data-story-id="' + this.model.get(PROPERTIES.storyID) + '"]')
                 .next('table')

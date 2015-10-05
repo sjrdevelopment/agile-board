@@ -31,7 +31,6 @@ define(
                         model: new storyModel()
                     });
 
-                    spyOn(view, 'removeView');
                 });
 
 
@@ -119,6 +118,7 @@ define(
 
               
             });
+
 
         });
     }
