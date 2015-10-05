@@ -18,7 +18,7 @@ define([
         editTask,
         $html,
         $body;
-    
+
     editTask = Backbone.View.extend({
         tagName: 'div',
 
@@ -50,15 +50,15 @@ define([
             this.$el.html(this.mainTemplate(this.model.attributes));
             $(GENERIC_SELECTORS.overlay).html(this.$el);
             $html.addClass(GENERIC_CLASSES.overlayActive);
-      
+
             window.event.stopPropagation();
 
             $body.on(GENERIC_EVENTS.closeOverlay, function(event) {
                 if ($(event.target).closest(GENERIC_SELECTORS.overlay).length === 0 ) {
                     $html.removeClass(GENERIC_CLASSES.overlayActive);
-                } 
+                }
             });
-            
+
             return this;
         }
     });

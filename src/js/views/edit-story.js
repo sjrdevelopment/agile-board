@@ -18,7 +18,7 @@ define([
         editStory,
         $html,
         $body;
-    
+
     editStory = Backbone.View.extend({
         tagName: 'div',
 
@@ -51,14 +51,14 @@ define([
 
             $(GENERIC_SELECTORS.overlay).html(this.$el);
             $html.addClass(GENERIC_CLASSES.overlayActive);
-            
+
             window.event.stopPropagation();
 
             $body.on(GENERIC_EVENTS.closeOverlay, function(event) {
 
                 if ( $(event.target).closest(GENERIC_SELECTORS.overlay).length === 0 ) {
                     $html.removeClass(GENERIC_CLASSES.overlayActive);
-                } 
+                }
             });
 
             return this;

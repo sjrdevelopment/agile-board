@@ -164,7 +164,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
 
-    grunt.registerTask('default', ['jshint', 'jasmine', 'requirejs', 'sass', 'copy', 'connect', 'watch' ]); // comment out connect
+    grunt.registerTask('default', ['jshint', 'requirejs', 'sass', 'copy', /*'connect:server',*/ 'watch' ]); // comment out connect
     grunt.registerTask('test', ['connect:jasmine', 'jasmine']);
     grunt.registerTask('deploy', ['jshint', 'jasmine', 'requirejs', 'sass', 'copy']);
 }

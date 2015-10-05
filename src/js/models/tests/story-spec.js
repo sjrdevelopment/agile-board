@@ -6,11 +6,12 @@ define(
     ],
     function (
         Backbone,
-        Constants,
+        constants,
         storyModel
     ) {
         'use strict';
 
+        var PROPERTIES = constants.story.properties;
 
         describe('Story model', function() {
            var model;
@@ -24,7 +25,7 @@ define(
                 });
 
 
-                it('should inherit from Backbone.Model', function () {
+                it('should inherit from Backbone.Model', function() {
                     expect(model instanceof Backbone.Model).toBe(true);
                 });
 
@@ -45,36 +46,34 @@ define(
                     }
 
                     model.syncWithApi(dummyChangedAttributes);
-
                 });
 
-
-                it('should call Backbone model save() function', function () {
+                it('should call Backbone model save() function', function() {
 
 
                     expect(model.save).toHaveBeenCalled();
                     expect(model.save.calls.argsFor(0)[0]).toEqual(dummyChangedAttributes);
                 });
             });
+
+            describe('onSaveSuccess', function() {
+                var attrs = {};
+
+                beforeEach(function() {
+                    attrs[PROPERTIES.priority] = 1;
+
+                    model = new storyModel(attrs);
+
+                    model.setPriority();
+                });
+
+
+            });
         });
 
 
+
 /*
-        initialize: function(attr, options) {
-            this.urlRoot = PROPERTIES.apiUrl;
-            this.idAttribute = PROPERTIES.idAttribute;
-
-            if (options.newModel) {
-                this.newModel = true;
-            } else {
-                this.setPriority();
-            }
-        },
-
-        syncedModel: function(mod, response, options) {
-
-        },
-
         setPriority: function(options, response) {
             if (this.newModel) {
 
@@ -83,24 +82,6 @@ define(
                 this.fetch({
                     success: _.bind(this.syncedModel, this)
                 });
-            }
-
-            switch(parseInt(this.get(PROPERTIES.priority), 10)) {
-                case 1: this.set(PROPERTIES.isp1, true);
-                        this.set(PROPERTIES.isp2, false);
-                        this.set(PROPERTIES.isp3, false);
-                break;
-                case 2: this.set(PROPERTIES.isp1, false);
-                        this.set(PROPERTIES.isp2, true);
-                        this.set(PROPERTIES.isp3, false);
-                break;
-                case 3: this.set(PROPERTIES.isp1, false);
-                        this.set(PROPERTIES.isp2, false);
-                        this.set(PROPERTIES.isp3, true);
-                break;
-                default: this.set(PROPERTIES.isp1, false);
-                         this.set(PROPERTIES.isp2, false);
-                         this.set(PROPERTIES.isp3, false);
             }
         },
 

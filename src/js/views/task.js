@@ -18,7 +18,7 @@ define([
 
     var CSS_CLASSES = constants.task.cssClasses,
         PROPERTIES = constants.task.properties,
-        task; 
+        task;
 
     task = Backbone.View.extend({
         tagName: 'div',
@@ -74,7 +74,7 @@ define([
                     this.model.get(PROPERTIES.description) +
                     '"?'
             );
-            
+
             if (warningMessage === true) {
                 this.model.destroy();
             } else {

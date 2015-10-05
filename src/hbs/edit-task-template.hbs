@@ -2,16 +2,20 @@
 <form>
 	<label for="priority">Priority</label>
 	<select id="priority" name="priority" selected="{{priority}}">
-		<option value="1" {{#if isp1}}selected="selected"{{/if}}>1</option>
-		<option value="2" {{#if isp2}}selected="selected"{{/if}}>2</option>
-		<option value="3" {{#if isp3}}selected="selected"{{/if}}>3</option>
+		{{#select priority}}
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		{{/select}}
 	</select>
-	
+
 	<label for="status">Status</label>
 	<select id="status" name="status" selected="{{status}}">
-		<option value="to do" {{#if isToDo}}selected="selected"{{/if}}>To do</option>
-		<option value="in progress" {{#if isInProgress}}selected="selected"{{/if}}>In progress</option>
-		<option value="done" {{#if isDone}}selected="selected"{{/if}}>Done</option>
+		{{#select status}}
+			<option value="to do">To do</option>
+			<option value="in progress">In progress</option>
+			<option value="done">Done</option>
+		{{/select}}
 	</select>
 
 	<label for="description">Description</label>

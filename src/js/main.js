@@ -8,7 +8,8 @@ require([
     'taskView',
     'editStoryView',
     'editStoryModel',
-    'constants'
+    'constants',
+    'handlebars'
 ], function (
     $,
     Backbone,
@@ -19,7 +20,8 @@ require([
     TaskView,
     EditStoryView,
     EditStoryModel,
-    constants
+    constants,
+    Handlebars
 ) {
     var stories,
         tasks,
@@ -33,6 +35,14 @@ require([
 
     Backbone.history.start();
 
+
+    Handlebars.registerHelper('select', function( value, options ){
+        var $el = $('<select />').html( options.fn(this) );
+        $el.find('[value="' + value + '"]').attr({'selected':'selected'});
+        return $el.html();
+    });
+
+
     stories = new StoriesCollection();
     tasks = new TasksCollection();
 
@@ -42,12 +52,17 @@ require([
         $(GENERIC_SELECTORS.board).append( view.render().el );
     };
 
+    addTaskView = function(modelAdded) {
+        var view = new TaskView({model: modelAdded});
+    };
+
     showError = function(error) {
         console.log(error);
     };
 
     stories.on('add', addItemView, this);
- 
+    tasks.on('add', addTaskView, this);
+
     stories.fetch({
         error: showError
     }).done(function(){
@@ -55,7 +70,7 @@ require([
             error: showError
         });
     });
-    
+
 
     $(GENERIC_SELECTORS.addStoryButton).on('click', function(event) {
         var newStoryModel,
@@ -68,9 +83,9 @@ require([
             if ($(event.target).closest(GENERIC_SELECTORS.overlay).length === 0 ) {
                 $html.removeClass(GENERIC_CLASSES.overlayActive);
                 $body.off(GENERIC_EVENTS.closeOverlay);
-            } 
+            }
         });
-        
+
         newStoryModel = new StoryModel({}, {newModel: true});
 
         editStory = new EditStoryView({
