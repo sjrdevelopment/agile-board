@@ -3,14 +3,14 @@
 @import 'helpers/variables.scss';
 
 .task-card {
-	background-color: #59ABE3;
-	color: #fff;
+	background-color: $aqua-8;
+	color: $white-1;
 	padding: 10px;
 	border-radius: 5px;
 	display: block;
 	margin: 10px;
 
 	.task-description {
-		@include x-rem(font-size, 12px);
+		@include x-rem(font-size, $small-font-size);
 	}
 }

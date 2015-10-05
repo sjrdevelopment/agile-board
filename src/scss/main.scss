@@ -4,7 +4,6 @@
 @import 'story.scss';
 @import 'task.scss';
 
-
 * {
 	box-sizing: border-box;
 }
@@ -16,28 +15,20 @@ button {
 	appearance: none;
 	border: 0;
 	box-shadow: none;
-	background-color: #F39C12;
-	color: #fff;
+	background-color: $amber-1;
+	color: $white-1;
 	border-radius: 5px;
 	padding: 6px;
 	cursor: pointer;
 
 	&:hover {
-		background-color: #F27935;
+		background-color: $amber-2;
 	}
 }
 
 body {
-	background-color: #34495E;
+	background-color: $aqua-1;
 	font-family: Helvetica, Arial, sans-serif;
-	
-	@include medium-up {
-		background-color: red;
-	}
-
-	@include large-up {
-		background-color: green;
-	}
 
 	.underlay,
 	.overlay {
@@ -59,7 +50,7 @@ body {
 		    left: 0;
 		    right: 0;
 		    bottom: 0;
-		    background-color: black;
+		    background-color: $black-1;
 		 }
 	}
 
@@ -67,24 +58,53 @@ body {
 		.overlay-active & {
 		    display: block;
 		    z-index: 9;
-		    width: 50%;
+		    width: 90%;
 		    height: 200px;
-		    background-color: white;
+		    background-color: $white-1;
 		    margin: auto;
 		    top: 20%;
-		    left: 25%;
+		    left: 5%;
 		    opacity: 1;
+
+		    @include large-up {
+			    width: 50%;
+			    top: 20%;
+			    left: 25%;
+		    }
 		}
 
 		.overlay-content {
-			background-color: #336E7B;
-			color: #fff;
+			background-color: $aqua-2;
+			color: $white-1;
 			padding: 10px;
 
 			&:after {
 				content: "";
 				display: table;
 				clear: both;
+			}
+			
+			label {
+				float: left;
+				clear: left;
+				width: 20%;
+				padding: 10px 10px 10px 0;
+				margin: 4px 0;
+			}
+
+			input,
+			select {
+				@include x-rem(font-size, $standard-font-size);
+
+				padding: 10px;
+				width: 80%;
+				float: right;
+				-webkit-appearance: none;
+				appearance: none;
+				background-color: $aqua-3;
+				color: $grey-1;
+				border: 0;
+				margin: 4px 0;
 			}
 
 			.natural-language-input {
@@ -103,15 +123,15 @@ body {
 				}
 
 				input {
-					@include x-rem(font-size, 14px);
+					@include x-rem(font-size, $standard-font-size);
 
 					padding: 10px;
 					width: 80%;
 					float: right;
 					-webkit-appearance: none;
 					appearance: none;
-					background-color: #C5EFF7;
-					color: #414141;
+					background-color: $aqua-3;
+					color: $grey-1;
 					border: 0;
 					margin: 4px 0;
 				}
@@ -128,15 +148,20 @@ body {
 
 	.board-title {
 		text-align: center;
-		color: #fff;
+		color: $white-1;
 		text-transform: uppercase;
 		margin: 60px auto 30px;
 	}
 
 	.board {
-		background-color: #fff;
-		width: 80%;
+		background-color: $white-1;
+		width: 100%;
 		margin: auto;
 		padding: 10px;
+
+		@include medium-up {
+			width: 80%;
+			margin: auto;
+		}
 	}
 }

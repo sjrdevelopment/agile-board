@@ -3,8 +3,8 @@
 @import 'helpers/variables.scss';
 
 .story-row {
-	color: #22313F;
-	background-color: #f5f5f5;
+	color: $aqua-4;
+	background-color: $grey-2;
 	padding: 10px;
 	display: inline-block;
 	width: 100%;
@@ -16,17 +16,21 @@
 	}
 
 	&:nth-child(odd) {
-		background-color: #cfe0e2;
+		background-color: $aqua-5;
 
 		.task-card {
-			background-color: #52B3D9;
+			background-color: $aqua-6;
 		}
 	}
 
 	.tasks {
-		width: 75%;
-		float: right;
-	
+		width: 100%;
+		display: block;
+		
+		@include large-up {
+			width: 75%;
+			float: right;
+		}
 	
 		tr {
 			vertical-align: top;
@@ -38,24 +42,29 @@
 		}
 
 		th {
-			@include x-rem(font-size, 14px);
+			@include x-rem(font-size, $standard-font-size);
 			
 			text-transform: uppercase;
-			font-weight: 400;
-			color: #67809F;
+			font-weight: $standard-font-weight;
+			color: $aqua-7;
 		}
 	}
 	
 	.story-card {
-		width: 25%;
+		width: 100%;
 		padding: 10px;
-		display: inline-block;
-		float: left;
+		display: block;
+		
+		@include large-up {
+			width: 25%;
+			display: inline-block;
+			float: left;
+		}
 
 		.story-name {
-			@include x-rem(font-size, 18px); //should use x-rem mixin
+			@include x-rem(font-size, $medium-font-size); //should use x-rem mixin
 			
-			font-weight: 400;
+			font-weight: $standard-font-weight;
 		}
 	}
 }

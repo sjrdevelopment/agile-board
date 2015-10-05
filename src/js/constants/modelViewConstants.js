@@ -37,11 +37,11 @@ define(
                     apiUrl: '/v1/stories',
                     idAttribute: 'id',
                     priority: 'priority',
-                    isp1: 'isp1',
-                    isp2: 'isp2',
-                    isp3: 'isp3',
                     persona: 'persona',
-                    feature: 'feature'
+                    feature: 'feature',
+                    created: 'created',
+                    modified: 'modified'
+
                 },
                 cssClasses: {
                     storyRow: 'story-row'
@@ -54,12 +54,6 @@ define(
                     idAttribute: 'id',
                     priority: 'priority',
                     status: 'status',
-                    isp1: 'isp1',
-                    isp2: 'isp2',
-                    isp3: 'isp3',
-                    isToDo: 'isToDo',
-                    isInProgress: 'isInProgress',
-                    isDone: 'isDone',
                     storyID: 'story_id',
                     description: 'description'
                 },

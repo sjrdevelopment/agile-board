@@ -42,10 +42,6 @@ require([
         return $el.html();
     });
 
-
-    stories = new StoriesCollection();
-    tasks = new TasksCollection();
-
     addItemView = function(modelAdded) {
         var view = new StoryView({model: modelAdded});
 
@@ -59,6 +55,9 @@ require([
     showError = function(error) {
         console.log(error);
     };
+    
+    stories = new StoriesCollection();
+    tasks = new TasksCollection();
 
     stories.on('add', addItemView, this);
     tasks.on('add', addTaskView, this);
