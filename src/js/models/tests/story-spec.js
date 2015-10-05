@@ -62,41 +62,19 @@ define(
                 beforeEach(function() {
                     attrs[PROPERTIES.priority] = 1;
 
-                    model = new storyModel(attrs);
+                    model = new storyModel(attrs, {
+                        newModel: true
+                    });
 
-                    model.setPriority();
+                    spyOn(model, 'fetch');
+
+                    model.onSaveSuccess();
                 });
 
-
+                it('as new model, should call Backbone fetch() to get further data from api', function() {
+                    expect(model.fetch).toHaveBeenCalled();
+                })
             });
         });
-
-
-
-/*
-        setPriority: function(options, response) {
-            if (this.newModel) {
-
-                this.set(PROPERTIES.idAttribute, response);
-
-                this.fetch({
-                    success: _.bind(this.syncedModel, this)
-                });
-            }
-        },
-
-        validate: function(attrs, options) {
-
-        },
-
-        showError: function(error, options) {
-
-        },
-
-        syncWithApi:  function(changedAttributes) {
-            if (!_.isEmpty(changedAttributes)) {
-                this.save(changedAttributes, {patch:true, error: this.showError, success: _.bind(this.setPriority, this)});
-            }
-        */
     }
 );

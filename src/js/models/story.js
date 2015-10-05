@@ -1,4 +1,4 @@
-define(['backbone', 'constants'], function(Backbone, constants) {
+define(['backbone', 'constants', 'underscore'], function(Backbone, constants, _) {
 
     var PROPERTIES = constants.story.properties,
         storyModel;
@@ -12,12 +12,8 @@ define(['backbone', 'constants'], function(Backbone, constants) {
             if (options && options.newModel) {
                 this.newModel = true;
             } else {
-                //this.setPriority();
+
             }
-        },
-
-        syncedModel: function(mod, response, options) {
-
         },
 
         onSaveSuccess: function(options, response) {
@@ -25,18 +21,8 @@ define(['backbone', 'constants'], function(Backbone, constants) {
 
                 this.set(PROPERTIES.idAttribute, response);
 
-                this.fetch({
-                    success: _.bind(this.syncedModel, this)
-                });
+                this.fetch();
             }
-        },
-
-        validate: function(attrs, options) {
-
-        },
-
-        showError: function(error, options) {
-
         },
 
         syncWithApi:  function(changedAttributes) {

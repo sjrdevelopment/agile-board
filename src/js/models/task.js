@@ -1,4 +1,4 @@
-define(['backbone', 'taskView', 'constants'], function(Backbone, TaskView, constants) {
+define(['backbone', 'taskView', 'constants', 'underscore'], function(Backbone, TaskView, constants, _) {
 
     var PROPERTIES = constants.task.properties,
         taskModel;
@@ -8,22 +8,10 @@ define(['backbone', 'taskView', 'constants'], function(Backbone, TaskView, const
         initialize: function(attr, options) {
             this.urlRoot = PROPERTIES.apiUrl;
             this.idAttribute = PROPERTIES.idAttribute;
-
-            if (!(options && options.newModel)) {
-                //this.setPriority();
-            }
-        },
-
-        syncedModel: function(mod, response, options) {
-
         },
 
         showError: function(error) {
-
-        },
-
-        setPrePriority: function(options, response) {
-
+            console.log(error);
         },
 
         onSaveSuccess: function(options, response) {
