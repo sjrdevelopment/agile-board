@@ -3,8 +3,10 @@
 ### Project setup
 
 The project contains `api` and `src` directories.
+
 `src` is the self-contained web front-end and Backbone.js app.
-`api` is the server running the REST api.
+
+`api` is the 3rd-party server running the REST api.
  
  -  Before running the steps below, setup the API dependencies by running `npm install` in the `api` directory.
 
