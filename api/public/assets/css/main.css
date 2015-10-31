@@ -1,0 +1,70 @@
+/* a small mixin for easy use of rem with px as fallback usage: @include x-rem(font-size, 14px) usage: @include x-rem(marign, 0 12px 2 1.2) usage: @include x-rem(padding, 1.5 24px) thanks to Eric Meyer for https://github.com/ericam/susy and Hans Christian Reinl for http://drublic.de/blog/rem-fallback-sass-less/ */
+/* a small mixin for easy use of rem with px as fallback usage: @include x-rem(font-size, 14px) usage: @include x-rem(marign, 0 12px 2 1.2) usage: @include x-rem(padding, 1.5 24px) thanks to Eric Meyer for https://github.com/ericam/susy and Hans Christian Reinl for http://drublic.de/blog/rem-fallback-sass-less/ */
+.story-row { color: #22313F; background-color: #f5f5f5; padding: 10px; display: inline-block; width: 100%; }
+
+.story-row:after { content: ""; display: table; clear: both; }
+
+.story-row:nth-child(odd) { background-color: #cfe0e2; }
+
+.story-row:nth-child(odd) .task-card { background-color: #52B3D9; }
+
+.story-row .tasks { width: 100%; display: block; }
+
+@media (min-width: 800px) { .story-row .tasks { width: 75%; float: right; } }
+
+.story-row .tasks tr { vertical-align: top; }
+
+.story-row .tasks td, .story-row .tasks th { width: 33.3%; }
+
+.story-row .tasks th { font-size: 14px; font-size: 0.875rem; text-transform: uppercase; font-weight: 400; color: #67809F; }
+
+.story-row .story-card { width: 100%; padding: 10px; display: block; }
+
+@media (min-width: 800px) { .story-row .story-card { width: 25%; display: inline-block; float: left; } }
+
+.story-row .story-card .story-name { font-size: 18px; font-size: 1.125rem; font-weight: 400; }
+
+/* a small mixin for easy use of rem with px as fallback usage: @include x-rem(font-size, 14px) usage: @include x-rem(marign, 0 12px 2 1.2) usage: @include x-rem(padding, 1.5 24px) thanks to Eric Meyer for https://github.com/ericam/susy and Hans Christian Reinl for http://drublic.de/blog/rem-fallback-sass-less/ */
+.task-card { background-color: #59ABE3; color: #FFFFFF; padding: 10px; border-radius: 5px; display: block; margin: 10px; }
+
+.task-card .task-description { font-size: 12px; font-size: 0.75rem; }
+
+* { box-sizing: border-box; }
+
+button { font-size: 14px; font-size: 0.875rem; -webkit-appearance: none; appearance: none; border: 0; box-shadow: none; background-color: #F39C12; color: #FFFFFF; border-radius: 5px; padding: 6px; cursor: pointer; }
+
+button:hover { background-color: #F27935; }
+
+body { background-color: #34495E; font-family: Helvetica, Arial, sans-serif; }
+
+body .underlay, body .overlay { visibility: hidden; opacity: 0; -webkit-transition: opacity, 0.4s, linear; transition: opacity, 0.4s, linear; }
+
+.overlay-active body .underlay, .overlay-active body .overlay { position: fixed; visibility: visible; opacity: 0.6; }
+
+.overlay-active body .underlay { top: 0; left: 0; right: 0; bottom: 0; background-color: #000000; }
+
+.overlay-active body .overlay { display: block; z-index: 9; width: 90%; height: 200px; background-color: #FFFFFF; margin: auto; top: 20%; left: 5%; opacity: 1; }
+
+@media (min-width: 800px) { .overlay-active body .overlay { width: 50%; top: 20%; left: 25%; } }
+
+body .overlay .overlay-content { background-color: #336E7B; color: #FFFFFF; padding: 10px; }
+
+body .overlay .overlay-content:after { content: ""; display: table; clear: both; }
+
+body .overlay .overlay-content label { float: left; clear: left; width: 20%; padding: 10px 10px 10px 0; margin: 4px 0; }
+
+body .overlay .overlay-content input, body .overlay .overlay-content select { font-size: 14px; font-size: 0.875rem; padding: 10px; width: 80%; float: right; -webkit-appearance: none; appearance: none; background-color: #C5EFF7; color: #414141; border: 0; margin: 4px 0; }
+
+body .overlay .overlay-content .natural-language-input:after { content: ""; display: table; clear: both; }
+
+body .overlay .overlay-content .natural-language-input label { float: left; clear: left; width: 20%; padding: 10px 10px 10px 0; margin: 4px 0; }
+
+body .overlay .overlay-content .natural-language-input input { font-size: 14px; font-size: 0.875rem; padding: 10px; width: 80%; float: right; -webkit-appearance: none; appearance: none; background-color: #C5EFF7; color: #414141; border: 0; margin: 4px 0; }
+
+body .overlay .overlay-content .save-button { clear: both; display: block; width: 120px; margin: 10px auto; }
+
+body .board-title { text-align: center; color: #FFFFFF; text-transform: uppercase; margin: 60px auto 30px; }
+
+body .board { background-color: #FFFFFF; width: 100%; margin: auto; padding: 10px; }
+
+@media (min-width: 480px) { body .board { width: 80%; margin: auto; } }

@@ -1,0 +1,23 @@
+{
+  "name": "core.recruitment.challenges.board",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "bluebird": "^2.9.34",
+    "body-parser": "~1.13.2",
+    "express": "~4.13.1",
+    "lodash": "^3.10.1",
+    "morgan": "~1.6.1",
+    "node-uuid": "^1.4.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "nodemon": "^1.4.1",
+    "should": "^7.1.0",
+    "supertest": "^1.0.1"
+  }
+}
